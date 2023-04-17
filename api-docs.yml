@@ -1,0 +1,298 @@
+openapi: 3.0.0
+info:
+  title: Management Backend
+  description: API docs
+  version: 1.0.0
+
+servers:
+  - url: "http://localhost:9000/api/"
+
+security:
+    - authorization: []
+
+tags:
+  - name: User
+    description: Endpoints to create and get user related data
+  - name: Login
+    description: Endpoints to login into system
+
+paths:
+  /user:
+    post:
+      tags:
+        - User
+      summary: Create a data for user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - User
+      summary: get all data for user
+      responses:
+        200:
+          description: OK
+
+  /user/{:id}:
+    get:
+      tags:
+        - User
+      summary: get by id data for user
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - User
+      summary: update data for user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userUpdate"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - User
+      summary: delete user
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+  /login:
+    post:
+      tags:
+        - Login
+      summary: Login into system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/login"
+      responses:
+        200:
+          description: Ok
+
+  /guestUser:
+    post:
+      tags:
+        - Guest User
+      summary: Create a data for guest user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/guestUser"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Guest User
+      summary: get all data for guest user
+      responses:
+        200:
+          description: OK
+
+  /guestUser/{:id}:
+    get:
+      tags:
+        - Guest User
+      summary: get by id data for guest user
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Guest User
+      summary: update data for guest user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/guestUserUpdate"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - Guest User
+      summary: delete guest user
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+  /guestLogin:
+    post:
+      tags:
+        - Guest User Login
+      summary: Guest Login into system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/guestLogin"
+      responses:
+        200:
+          description: Ok
+
+
+components:
+  securitySchemes:
+    authorization:
+      type: http
+      scheme: bearer
+      bearerFormat: jwt
+  schemas:
+    user:
+      type: object
+      required:
+        - firstName
+        - email
+        - password
+        - address
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        address:
+          type: string
+        mobile:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+
+    userUpdate:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+        - address
+      properties:
+        firstName:
+          type: string
+        middleName:
+          type: string
+        lastName:
+          type: string
+        address:
+          type: string
+        mobile:
+          type: string
+        email:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+
+    login:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    guestUser:
+      type: object
+      required:
+        - email
+        - type
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        mobile:
+          type: string
+        type:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+
+    guestUserUpdate:
+      type: object
+      required:
+        - email
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        mobile:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+
+    guestLogin:
+      type: object
+      required:
+        - email
+        - password
+        - type
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        type:
+          type: string
