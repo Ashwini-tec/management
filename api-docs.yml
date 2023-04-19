@@ -279,6 +279,70 @@ paths:
         200:
           description: OK
 
+  /city:
+    post:
+      tags:
+        - City
+      summary: Create a data for city
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/city"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - City
+      summary: get all data for city
+      responses:
+        200:
+          description: OK
+
+  /city/{:id}:
+    get:
+      tags:
+        - City
+      summary: get by id data for city
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - City
+      summary: update data for city
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/city"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - City
+      summary: delete city
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
 components:
   securitySchemes:
     authorization:
@@ -438,4 +502,15 @@ components:
         - name
       properties:
         name:
+          type: string
+
+    city:
+      type: object
+      required:
+        - name
+        - image
+      properties:
+        name:
+          type: string
+        image:
           type: string
