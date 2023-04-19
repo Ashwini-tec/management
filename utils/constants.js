@@ -10,6 +10,8 @@ const MESSAGE = {
     DATA_ALREADY_EXIST: 'Data already registered',
     ROLE_NOT_FOUND: 'Role not found',
     SUCCESS_PASSWORD_CHANGE: 'Password changed successfully',
+    INCORRECT_OTP: 'Incorrect OTP',
+    OTP_VALIDATION_SUCCESS: 'OTP verify successFully',
 };
 
 export { MESSAGE };

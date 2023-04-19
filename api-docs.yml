@@ -173,6 +173,47 @@ paths:
         200:
           description: Ok
 
+  /user/forgot/password:
+    post:
+      tags:
+        - User
+      summary: generate forgot password for user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/forgotPassword"
+      responses:
+        200:
+          description: OK
+
+  /user/reset/password:
+    post:
+      tags:
+        - User
+      summary: reset password for user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/resetPassword"
+      responses:
+        200:
+          description: OK
+
+  /user/otp/verify:
+    post:
+      tags:
+        - User
+      summary: otp verify for user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/otpVerify"
+      responses:
+        200:
+          description: OK
 
 components:
   securitySchemes:
@@ -295,4 +336,34 @@ components:
         password:
           type: string
         type:
+          type: string
+
+    forgotPassword:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+
+    resetPassword:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    otpVerify:
+      type: object
+      required:
+        - email
+        - otp
+      properties:
+        email:
+          type: string
+        otp:
           type: string

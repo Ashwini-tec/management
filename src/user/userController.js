@@ -109,10 +109,55 @@ const deleteUser = async(req, res) => {
     }
 };
 
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ */
+const forgotPassword = async(req, res) => {
+    try {
+        const { email } = req.body;
+        const detail = await userSevice.forgotPassword(email);
+        return res.status(200).json({
+            data: detail ?? MESSAGE.DATA_NOT_FOUND,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ */
+const resetPassword = async(req, res) => {
+    try {
+        const { email, password } = req.body;
+        const detail = await userSevice.resetPassword(email, password);
+        return res.status(200).json({
+            data: detail ?? MESSAGE.DATA_NOT_FOUND,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+
 export{
     createUser,
     getUser,
     getById,
     updateUser,
     deleteUser,
+    forgotPassword,
+    resetPassword,
 };

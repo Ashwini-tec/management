@@ -54,4 +54,31 @@ router.delete(
     user.deleteUser
 );
 
+/**
+ * forgot password
+ */
+router.post(
+    '/user/forgot/password',
+    validation(userSchema.forgotPassword()),
+    user.forgotPassword
+);
+
+/**
+ * reset password
+ */
+router.post(
+    '/user/reset/password',
+    validation(userSchema.resetPassword()),
+    user.resetPassword
+);
+
+/**
+ * OTP verification
+ */
+router.post(
+    '/user/otp/verify',
+    validation(userSchema.otpVerification()),
+    authenticate.verifyOTP
+);
+
 export default router;

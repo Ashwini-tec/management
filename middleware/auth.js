@@ -30,4 +30,22 @@ const generateToken = (data) => {
     return jwt.sign({ data: data }, config.JWT_SECRETE_KEY);
 };
 
-export { verifyUser, generateToken };
+/********************** verify opt *********** */
+const verifyOTP = async(req, res)=>{
+    try {
+        const { email, otp } = req.body; 
+        const info = await User.findOne({ email: email}).lean();
+        if ( !info ){
+            return res.status(404).json({data: MESSAGE.DATA_NOT_FOUND });
+        }
+        if(otp !== info.otp){
+            return res.status(400).json({ data: MESSAGE.INCORRECT_OTP });
+        }
+        return res.status(200).json({ data: MESSAGE.OTP_VALIDATION_SUCCESS });
+    } catch (error) {
+        return res.status(500).send({error: error.message});
+    }
+};
+
+
+export { verifyUser, generateToken ,verifyOTP };

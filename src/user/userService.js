@@ -1,6 +1,7 @@
 import User from './userDb.js';
 import { MESSAGE } from '../../utils/constants.js';
 import bcrypt from 'bcrypt';
+import * as mailer from '../../utils/email.js';
 
 /**
  *
@@ -92,10 +93,61 @@ const deleteUser = async(id) => {
     }
 };
 
+/**
+ *
+ * @param {*} id
+ * @returns
+ */
+const forgotPassword = async(email) => {
+    try {
+        const max = 6;
+        const otp = Math.floor(Math.random() * max);
+        const info = await User.findOne({ email: email}).lean();
+        if ( !info ){
+            return MESSAGE.DATA_NOT_FOUND;
+        }
+        const detail = await User.updateOne(
+            { email: email},
+            { $set: { opt: otp }},
+        );
+        let mail = await mailer.forgotPassword(email);
+        if(!mail.sent){
+            return mail.message;
+        }
+        return detail;
+    } catch (error) {
+        return error.message;
+    }
+};
+
+/**
+ *
+ * @param {*} id
+ * @returns
+ */
+const resetPassword = async(email, password) => {
+    try {
+        const info = await User.findOne({ email: email}).lean();
+        if ( !info ){
+            return MESSAGE.DATA_NOT_FOUND;
+        }
+        const pass = bcrypt.hashSync(password, 10);
+        const detail = await User.UpdateOne(
+            { email: email},
+            { $set: { password: pass }},
+        );
+        return detail;
+    } catch (error) {
+        return error.message;
+    }
+};
+
 export{
     createUser,
     getUser,
     getById,
     updateUser,
     deleteUser,
+    forgotPassword,
+    resetPassword,
 };
