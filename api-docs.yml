@@ -343,6 +343,70 @@ paths:
         200:
           description: OK
 
+  /vendorProfile:
+    post:
+      tags:
+        - Vendor Profile
+      summary: Create a data for vendorProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/vendorProfile"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Vendor Profile
+      summary: get all data for vendorProfile
+      responses:
+        200:
+          description: OK
+
+  /vendorProfile/{:id}:
+    get:
+      tags:
+        - Vendor Profile
+      summary: get by id data for vendorProfile
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Vendor Profile
+      summary: update data for vendorProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/vendorProfile"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - Vendor Profile
+      summary: delete vendorProfile
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
 components:
   securitySchemes:
     authorization:
@@ -514,3 +578,41 @@ components:
           type: string
         image:
           type: string
+
+    vendorProfile:
+        type: object
+        required:
+          - userId
+        properties:
+          userId:
+            type: string
+          isGST:
+            type: string
+          GSTIN:
+            type: string
+          PAN:
+            type: string
+          organizationName:
+            type: string
+          organizationAddress:
+            type: string
+          state:
+            type: string
+          contact:
+            type: string
+          email:
+            type: string
+          accountType:
+            type: string
+          beneficiaryName:
+            type: string
+          accountName:
+            type: string
+          IFSC:
+            type: string
+          panImage:
+            type: string
+          cancelledChequeImage:
+            type: string
+          agreementSigning:
+            type: string
