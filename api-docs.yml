@@ -215,6 +215,70 @@ paths:
         200:
           description: OK
 
+  /state:
+    post:
+      tags:
+        - State
+      summary: Create a data for state
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/state"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - State
+      summary: get all data for state
+      responses:
+        200:
+          description: OK
+
+  /state/{:id}:
+    get:
+      tags:
+        - State
+      summary: get by id data for state
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - State
+      summary: update data for state
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/state"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - State
+      summary: delete state
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
 components:
   securitySchemes:
     authorization:
@@ -366,4 +430,12 @@ components:
         email:
           type: string
         otp:
+          type: string
+
+    state:
+      type: object
+      required:
+        - name
+      properties:
+        name:
           type: string
