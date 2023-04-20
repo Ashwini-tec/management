@@ -7,3 +7,5 @@ export { default as category } from '../src/category/categoryRoutes.js';
 export { default as partner } from '../src/partner/partnerRoutes.js';
 export { default as tags } from '../src/tags/tagsRoutes.js';
 export { default as vendorProfile } from '../src/vendorProfile/vendorProfileRoutes.js';
+export { default as tickets } from '../src/tickets/ticketsRoutes.js';
+export { default as artist } from '../src/artist/artistRoutes.js';
