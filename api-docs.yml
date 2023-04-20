@@ -727,6 +727,71 @@ paths:
         200:
           description: OK
 
+  /eventListing:
+    post:
+      tags:
+        - Event Listing
+      summary: Create a data for eventListing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/eventListing"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Event Listing
+      summary: get all data for eventListing
+      responses:
+        200:
+          description: OK
+
+  /eventListing/{:id}:
+    get:
+      tags:
+        - Event Listing
+      summary: get by id data for eventListing
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Event Listing
+      summary: update data for eventListing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/eventListing"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - Event Listing
+      summary: delete eventListing
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+
 components:
   securitySchemes:
     authorization:
@@ -1045,3 +1110,86 @@ components:
             type: boolean
           next_ticket_slab:
             type: boolean
+
+    eventListing:
+      type: object
+      required:
+        - guestid
+        - status
+        - event_type
+        - event_title
+        - category
+        - tags
+        - event_cover_img
+        - event_day_type
+        - start_date
+        - end_date
+        - start_time
+        - end_time
+        - description
+        - term_conditions
+        - city
+        - venue_type
+        - select_venue
+        - other_venue
+        - select_venue_img
+        - select_venue_name
+        - venue_address
+        - latitude
+        - longitude
+        - artist
+        - partner
+        - tickets
+      properties:
+        guestid:
+          type: string
+        status:
+          type: string
+        event_type:
+          type: string
+        event_title:
+          type: string
+        category:
+          type: string
+        tags:
+          type: string
+        event_cover_img:
+          type: string
+        event_day_type:
+          type: string
+        start_date:
+          type: string
+        end_date:
+          type: string
+        start_time:
+          type: string
+        end_time:
+          type: string
+        description:
+          type: string
+        term_conditions:
+          type: string
+        city:
+          type: string
+        venue_type:
+          type: string
+        select_venue:
+          type: string
+        other_venue:
+          type: string
+        select_venue_img:
+          type: string
+        select_venue_name:
+          type: string
+        venue_address:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        artist:
+          type: string
+        partner:
+          type: string
+        tickets:
+          type: string

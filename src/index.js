@@ -9,3 +9,4 @@ export { default as tags } from '../src/tags/tagsRoutes.js';
 export { default as vendorProfile } from '../src/vendorProfile/vendorProfileRoutes.js';
 export { default as tickets } from '../src/tickets/ticketsRoutes.js';
 export { default as artist } from '../src/artist/artistRoutes.js';
+export { default as eventListing } from '../src/eventListing/eventListingRoutes.js';
