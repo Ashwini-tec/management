@@ -471,6 +471,70 @@ paths:
         200:
           description: OK
 
+  /tags:
+    post:
+      tags:
+        - Tags
+      summary: Create a data for tags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/tags"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Tags
+      summary: get all data for tags
+      responses:
+        200:
+          description: OK
+
+  /tags/{:id}:
+    get:
+      tags:
+        - Tags
+      summary: get by id data for tags
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Tags
+      summary: update data for tags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/tags"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - Tags
+      summary: delete tags
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
 components:
   securitySchemes:
     authorization:
@@ -682,6 +746,14 @@ components:
             type: string
 
     category:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+
+    tags:
       type: object
       required:
         - name
