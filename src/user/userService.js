@@ -110,7 +110,7 @@ const forgotPassword = async(email) => {
             { email: email},
             { $set: { opt: otp }},
         );
-        let mail = await mailer.forgotPassword(email);
+        let mail = await mailer.forgotPassword(email, otp);
         if(!mail.sent){
             return mail.message;
         }
