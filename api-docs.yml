@@ -663,6 +663,69 @@ paths:
         200:
           description: OK
 
+  /tickets:
+    post:
+      tags:
+        - Ticket
+      summary: Create a data for ticket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/tickets"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Ticket
+      summary: get all data for ticket
+      responses:
+        200:
+          description: OK
+
+  /tickets/{:id}:
+    get:
+      tags:
+        - Ticket
+      summary: get by id data for ticket
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Ticket
+      summary: update data for ticket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/tickets"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - Ticket
+      summary: delete ticket
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
 
 components:
   securitySchemes:
@@ -929,3 +992,56 @@ components:
           type: string
         linkedin_url:
           type: string
+
+    tickets:
+      type: object
+      required:
+        - ticket_type
+        - ticket_name
+        - start_date
+        - end_date
+        - start_time
+        - end_time
+        - price
+        - gst_type
+        - gst_included
+        - customer_price
+        - ticket_quantity
+        - primary_add_info
+        - secondary_add_info
+        - enable_ticket
+        - phase_slab_type
+        - next_ticket_slab
+      properties:
+          ticket_type:
+            type: string
+          ticket_name:
+            type: string
+          start_date:
+            type: string
+          end_date:
+            type: string
+          start_time:
+            type: string
+          end_time:
+            type: string
+          price:
+            type: string
+          gst_type:
+            type: string
+          gst_included:
+            type: boolean
+          customer_price:
+            type: string
+          ticket_quantity:
+            type: string
+          primary_add_info:
+            type: string
+          secondary_add_info:
+            type: string
+          enable_ticket:
+            type: boolean
+          phase_slab_type:
+            type: boolean
+          next_ticket_slab:
+            type: boolean
