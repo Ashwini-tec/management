@@ -407,6 +407,70 @@ paths:
         200:
           description: OK
 
+  /category:
+    post:
+      tags:
+        - Category
+      summary: Create a data for category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/category"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Category
+      summary: get all data for category
+      responses:
+        200:
+          description: OK
+
+  /category/{:id}:
+    get:
+      tags:
+        - Category
+      summary: get by id data for category
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Category
+      summary: update data for category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/category"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - Category
+      summary: delete category
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
 components:
   securitySchemes:
     authorization:
