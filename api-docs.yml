@@ -599,6 +599,71 @@ paths:
         200:
           description: OK
 
+  /artist:
+    post:
+      tags:
+        - Artist
+      summary: Create a data for artist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/artist"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Artist
+      summary: get all data for artist
+      responses:
+        200:
+          description: OK
+
+  /artist/{:id}:
+    get:
+      tags:
+        - Artist
+      summary: get by id data for artist
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Artist
+      summary: update data for artist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/artist"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - Artist
+      summary: delete artist
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+
 components:
   securitySchemes:
     authorization:
@@ -837,4 +902,30 @@ components:
         partner_img:
           type: string
         partner_bio:
+          type: string
+
+    artist:
+      type: object
+      required:
+        - artist_name
+        - artist_img
+        - artist_bio
+        - fb_url
+        - insta_url
+        - twitter_url
+        - linkedin_url
+      properties:
+        artist_name:
+          type: string
+        artist_img:
+          type: string
+        artist_bio:
+          type: string
+        fb_url:
+          type: string
+        insta_url:
+          type: string
+        twitter_url:
+          type: string
+        linkedin_url:
           type: string
