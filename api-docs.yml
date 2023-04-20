@@ -535,6 +535,70 @@ paths:
         200:
           description: OK
 
+  /partner:
+    post:
+      tags:
+        - Partner
+      summary: Create a data for partner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/partner"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Partner
+      summary: get all data for partner
+      responses:
+        200:
+          description: OK
+
+  /partner/{:id}:
+    get:
+      tags:
+        - Partner
+      summary: get by id data for partner
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Partner
+      summary: update data for partner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/partner"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - Partner
+      summary: delete partner
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
 components:
   securitySchemes:
     authorization:
@@ -759,4 +823,18 @@ components:
         - name
       properties:
         name:
+          type: string
+
+    partner:
+      type: object
+      required:
+        - partner_name
+        - partner_img
+        - partner_bio
+      properties:
+        partner_name:
+          type: string
+        partner_img:
+          type: string
+        partner_bio:
           type: string
