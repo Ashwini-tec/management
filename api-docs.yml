@@ -680,3 +680,11 @@ components:
             type: string
           agreementSigning:
             type: string
+
+    category:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
