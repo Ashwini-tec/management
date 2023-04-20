@@ -22,7 +22,8 @@ const VendorProfileSchema = new mongoose.Schema({
         type: String,
     },
     state:{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'state',
     },
     contact:{
         type: String,

@@ -25,7 +25,7 @@ const createVendorProfile = async(data) => {
  */
 const getVendorProfile = async() => {
     try {
-        const detail = await VendorProfile.find({}).populate('userId').lean();
+        const detail = await VendorProfile.find({}).populate('userId').populate('state').lean();
         return detail;
     } catch (error) {
         return error.message;
@@ -39,7 +39,7 @@ const getVendorProfile = async() => {
  */
 const getById = async(id) => {
     try {
-        const detail = await VendorProfile.findById({ _id: id }).populate('userId').lean();
+        const detail = await VendorProfile.findById({ _id: id }).populate('userId').populate('state').lean();
         return detail;
     } catch (error) {
         return error.message;
