@@ -1,5 +1,6 @@
 import EventListing from './eventListingDb.js';
 import { MESSAGE } from '../../utils/constants.js';
+import Tickets from '../tickets/ticketsDb.js';
 
 /**
  *
@@ -25,7 +26,7 @@ const createEventListing = async(data) => {
  */
 const getEventListing = async() => {
     try {
-        const detail = await EventListing.find({}).lean();
+        const detail = await EventListing.find({}).select({ artist: 0, partner: 0}).lean();
         return detail;
     } catch (error) {
         return error.message;
@@ -37,9 +38,11 @@ const getEventListing = async() => {
  * @param {*} id
  * @returns
  */
-const getById = async(id) => {
+const getById = async(id,guestId) => {
     try {
         const detail = await EventListing.findById({ _id: id }).lean();
+        const tickets = await Tickets.find({ guestId: guestId}).lean();
+        detail.tickets = tickets;
         return detail;
     } catch (error) {
         return error.message;
@@ -87,10 +90,34 @@ const deleteEventListing = async(id) => {
     }
 };
 
+/**
+ *
+ * @param {*} id
+ * @returns
+ */
+const editEventListingDetails = async(id, data, key, idx) => {
+    try {
+        const info = await EventListing.findOne({ _id: id }).lean();
+        if (!info){
+            return MESSAGE.DATA_NOT_FOUND;
+        }
+        info[key][idx] = data;
+        const detail = await EventListing.findOneAndUpdate(
+            { _id: id },
+            info,
+            { new : true }
+        );
+        return detail;
+    } catch (error) {
+        return error.message;
+    }
+};
+
 export{
     createEventListing,
     getEventListing,
     getById,
     updateEventListing,
     deleteEventListing,
+    editEventListingDetails,
 };

@@ -749,7 +749,7 @@ paths:
         200:
           description: OK
 
-  /eventListing/{:id}:
+  /eventListing/{:id}/{:guestId}:
     get:
       tags:
         - Event Listing
@@ -758,10 +758,14 @@ paths:
         - in: path
           name: :id
           required: true
+        - in: path
+          name: :guestId
+          required: true
       responses:
         200:
           description: OK
 
+  /eventListing/{:id}:
     put:
       tags:
         - Event Listing
@@ -791,6 +795,23 @@ paths:
         200:
           description: OK
 
+  /eventListing/details/{:id}:
+    put:
+      tags:
+        - Event Listing
+      summary: update details ( artist/ partner) for eventListing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/eventListingDetails"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
 
 components:
   securitySchemes:
@@ -1193,3 +1214,16 @@ components:
           type: string
         partner:
           type: string
+
+    eventListingDetails:
+      type: object
+      required:
+        - idx
+        - key 
+      properties:
+        idx:
+          type: number
+        key:
+          type: string
+        data:
+          type: object

@@ -1,5 +1,6 @@
 import * as eventListingSevice from './eventListingService.js';
 import { MESSAGE } from '../../utils/constants.js';
+
 /**
  *
  * @param {*} req
@@ -50,7 +51,8 @@ const getEventListing = async(req, res) => {
 const getById = async(req, res) => {
     try {
         const { id : eventListingId } = req.params;
-        const detail = await eventListingSevice.getById(eventListingId);
+        const guestId = req.params;
+        const detail = await eventListingSevice.getById(eventListingId,guestId);
         return res.status(200).json({
             data: detail ?? MESSAGE.DATA_NOT_FOUND,
         });
@@ -105,10 +107,36 @@ const deleteEventListing = async(req, res) => {
     }
 };
 
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ */
+const editEventListingDetails = async(req, res) => {
+    try {
+        const { id: eventListingId } = req.params;
+        const key = req.body.key;
+        const idx = req.body.idx;
+        const data = {...req.body.data};
+        const detail = await eventListingSevice.editEventListingDetails(eventListingId, data, key, idx);
+        return res.status(200).json({
+            data: detail ?? MESSAGE.DATA_NOT_FOUND,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+
 export{
     createEventListing,
     getEventListing,
     getById,
     updateEventListing,
     deleteEventListing,
+    editEventListingDetails,
 };

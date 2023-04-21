@@ -11,6 +11,7 @@ const router = new Router();
  */
 router.post(
     '/tags',
+    authenticate.verifyUser,
     validation(tagsSchema.create()),
     tagsController.createTags
 );

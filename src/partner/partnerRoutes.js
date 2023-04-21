@@ -11,6 +11,7 @@ const router = new Router();
  */
 router.post(
     '/partner',
+    authenticate.verifyUser,
     validation(partnerSchema.create()),
     partnerController.createPartner
 );

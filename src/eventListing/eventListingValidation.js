@@ -68,7 +68,16 @@ const update = () => {
     });
 };
 
+const updateDetails = () => {
+    return Joi.object({
+        idx: Joi.number(),
+        key: Joi.string(),
+        data: Joi.any(),
+    });
+};
+
 export{
     create,
     update,
+    updateDetails,
 };

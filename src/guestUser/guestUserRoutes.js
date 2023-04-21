@@ -11,6 +11,7 @@ const router = new Router();
  */
 router.post(
     '/gust user',
+    authenticate.verifyUser,
     validation(guestUserSchema.create()),
     guestUser.createGuestUser
 );

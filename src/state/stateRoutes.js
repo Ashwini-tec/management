@@ -11,6 +11,7 @@ const router = new Router();
  */
 router.post(
     '/state',
+    authenticate.verifyUser,
     validation(stateSchema.create()),
     stateController.createState
 );

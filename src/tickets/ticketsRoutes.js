@@ -11,6 +11,7 @@ const router = new Router();
  */
 router.post(
     '/tickets',
+    authenticate.verifyUser,
     validation(ticketsSchema.create()),
     ticketsController.createTickets
 );
@@ -50,7 +51,7 @@ router.put(
 router.delete(
     '/tickets/:id',
     authenticate.verifyUser,
-    ticketsController.deleTickets
+    ticketsController.deleteTickets
 );
 
 export default router;

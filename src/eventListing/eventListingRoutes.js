@@ -11,6 +11,7 @@ const router = new Router();
  */
 router.post(
     '/eventListing',
+    authenticate.verifyUser,
     validation(eventListingSchema.create()),
     eventListingController.createEventListing
 );
@@ -28,7 +29,7 @@ router.get(
  * get eventListing by id
  */
 router.get(
-    '/eventListing/:id',
+    '/eventListing/:id/:guestId',
     authenticate.verifyUser,
     eventListingController.getById
 );
@@ -51,6 +52,16 @@ router.delete(
     '/eventListing/:id',
     authenticate.verifyUser,
     eventListingController.deleteEventListing
+);
+
+/**
+ * update eventListing partner or artist detail
+ */
+router.put(
+    '/eventListing/details/:id',
+    authenticate.verifyUser,
+    validation(eventListingSchema.updateDetails()),
+    eventListingController.editEventListingDetails
 );
 
 export default router;
