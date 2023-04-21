@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 const ticketSchema = new mongoose.Schema({
     
-    guestId:{
+    eventId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'guest_user',
+        ref: 'eventListing',
     },
     ticket_type:{
         type: String,

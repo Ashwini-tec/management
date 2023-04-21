@@ -38,10 +38,10 @@ const getEventListing = async() => {
  * @param {*} id
  * @returns
  */
-const getById = async(id,guestId) => {
+const getById = async(id) => {
     try {
         const detail = await EventListing.findById({ _id: id }).lean();
-        const tickets = await Tickets.find({ guestId: guestId}).lean();
+        const tickets = await Tickets.find({ eventId: id}).lean();
         detail.tickets = tickets;
         return detail;
     } catch (error) {

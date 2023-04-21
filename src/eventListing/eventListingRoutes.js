@@ -29,7 +29,7 @@ router.get(
  * get eventListing by id
  */
 router.get(
-    '/eventListing/:id/:guestId',
+    '/eventListing/:id',
     authenticate.verifyUser,
     eventListingController.getById
 );

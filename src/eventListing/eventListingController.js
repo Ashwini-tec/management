@@ -51,8 +51,7 @@ const getEventListing = async(req, res) => {
 const getById = async(req, res) => {
     try {
         const { id : eventListingId } = req.params;
-        const guestId = req.params;
-        const detail = await eventListingSevice.getById(eventListingId,guestId);
+        const detail = await eventListingSevice.getById(eventListingId);
         return res.status(200).json({
             data: detail ?? MESSAGE.DATA_NOT_FOUND,
         });

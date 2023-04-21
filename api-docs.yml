@@ -749,7 +749,7 @@ paths:
         200:
           description: OK
 
-  /eventListing/{:id}/{:guestId}:
+  /eventListing/{:id}:
     get:
       tags:
         - Event Listing
@@ -758,14 +758,10 @@ paths:
         - in: path
           name: :id
           required: true
-        - in: path
-          name: :guestId
-          required: true
       responses:
         200:
           description: OK
 
-  /eventListing/{:id}:
     put:
       tags:
         - Event Listing
