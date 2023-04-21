@@ -31,7 +31,6 @@ const create = () =>{
         longitude: Joi.string(),
         artist: Joi.array(),
         partner: Joi.array(),
-        tickets: Joi.array(),
     });
 };
 
@@ -66,7 +65,6 @@ const update = () => {
         longitude: Joi.string(),
         artist: Joi.array(),
         partner: Joi.array(),
-        tickets: Joi.array(),
     });
 };
 

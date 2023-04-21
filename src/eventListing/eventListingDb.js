@@ -79,7 +79,6 @@ const eventListingSchema = new mongoose.Schema({
     },
     artist:[],
     partner:[],
-    tickets:[],
     isActive:{
         type: Boolean,
         default: true,

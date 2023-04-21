@@ -1142,7 +1142,6 @@ components:
         - longitude
         - artist
         - partner
-        - tickets
       properties:
         guestid:
           type: string
@@ -1193,6 +1192,4 @@ components:
         artist:
           type: string
         partner:
-          type: string
-        tickets:
           type: string
