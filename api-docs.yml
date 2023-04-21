@@ -1061,6 +1061,7 @@ components:
     tickets:
       type: object
       required:
+        - guestId
         - ticket_type
         - ticket_name
         - start_date
@@ -1078,6 +1079,8 @@ components:
         - phase_slab_type
         - next_ticket_slab
       properties:
+          guestId:
+            type: string
           ticket_type:
             type: string
           ticket_name:

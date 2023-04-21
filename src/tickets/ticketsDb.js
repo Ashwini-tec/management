@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 
 const ticketSchema = new mongoose.Schema({
     
+    guestId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'guest_user',
+    },
     ticket_type:{
         type: String,
     },
