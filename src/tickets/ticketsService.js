@@ -8,10 +8,6 @@ import { MESSAGE } from '../../utils/constants.js';
  */
 const createTickets = async(data) => {
     try {
-        const TicketsData = await Tickets.findOne({ name : data.name }).lean();
-        if(TicketsData){
-            return MESSAGE.DATA_ALREADY_EXIST;
-        }
         const detail = await Tickets.create(data);
         return detail;
     } catch (error) {
@@ -54,9 +50,9 @@ const getById = async(id) => {
  */
 const updateTickets = async(id, data) => {
     try {
-        const TicketsData = await Tickets.findOne({ name : data.name }).lean();
-        if( TicketsData && id !== String(TicketsData._id) ){
-            return MESSAGE.DATA_ALREADY_EXIST;
+        const TicketsData = await Tickets.findOne({ _id : id }).lean();
+        if( !TicketsData ){
+            return MESSAGE.DATA_NOT_FOUND;
         }
         const detail = await Tickets.findByIdAndUpdate(
             { _id:id },

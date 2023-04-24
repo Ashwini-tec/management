@@ -7,6 +7,7 @@ import Joi from 'joi';
 const create = () =>{
     return Joi.object({
         eventId: Joi.string(),
+        guestId: Joi.string(),
         ticket_type:Joi.string(),
         ticket_name:Joi.string(),
         start_date:Joi.string(),
@@ -33,6 +34,7 @@ const create = () =>{
 const update = () => {
     return Joi.object({
         eventId: Joi.string(),
+        guestId: Joi.string(),
         ticket_type:Joi.string(),
         ticket_name:Joi.string(),
         start_date:Joi.string(),

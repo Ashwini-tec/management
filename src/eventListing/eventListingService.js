@@ -9,10 +9,6 @@ import Tickets from '../tickets/ticketsDb.js';
  */
 const createEventListing = async(data) => {
     try {
-        const EventListingData = await EventListing.findOne({ name : data.name }).lean();
-        if(EventListingData){
-            return MESSAGE.DATA_ALREADY_EXIST;
-        }
         const detail = await EventListing.create(data);
         return detail;
     } catch (error) {
@@ -57,9 +53,9 @@ const getById = async(id) => {
  */
 const updateEventListing = async(id, data) => {
     try {
-        const EventListingData = await EventListing.findOne({ name : data.name }).lean();
-        if( EventListingData && id !== String(EventListingData._id) ){
-            return MESSAGE.DATA_ALREADY_EXIST;
+        const EventListingData = await EventListing.findOne({ _id : id }).lean();
+        if( !EventListingData ){
+            return MESSAGE.DATA_NOT_FOUND;
         }
         const detail = await EventListing.findByIdAndUpdate(
             { _id:id },

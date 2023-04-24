@@ -6,6 +6,10 @@ const ticketSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'eventListing',
     },
+    userId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'guest_user',
+    },
     ticket_type:{
         type: String,
     },

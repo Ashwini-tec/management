@@ -809,6 +809,129 @@ paths:
         200:
           description: OK
 
+  /promoter:
+    post:
+      tags:
+        - Promoter
+      summary: Create a data for promoter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/promoter"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Promoter
+      summary: get all data for promoter
+      responses:
+        200:
+          description: OK
+
+  /promoter/{:id}:
+    get:
+      tags:
+        - Promoter
+      summary: get by id data for promoter
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Promoter
+      summary: update data for promoter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/promoter"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - Promoter
+      summary: delete promoter
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+  /promoter/category/event/{:id}:
+    post:
+      tags:
+        - Promoter
+      summary: Create a category for promoter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/promotersCategory"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+  /promoter/category/event/{:id}/{:idx}:
+    post:
+      tags:
+        - Promoter
+      summary: Update a category for promoter using index
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/promotersCategory"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+        - in: path
+          name: :idx
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Promoter
+      summary: delete a category for promoter using index
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/promotersCategory"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+        - in: path
+          name: :idx
+          required: true
+      responses:
+        200:
+          description: OK
+
 components:
   securitySchemes:
     authorization:
@@ -1223,3 +1346,43 @@ components:
           type: string
         data:
           type: object
+
+    promoter:
+      type: object
+      required:
+        - name
+        - eventId
+        - email
+        - mobile_number
+        - enable_offline_punching
+        - enable_bulk_offline_punching
+      properties:
+        name:
+          type: string
+        eventId:
+          type: string
+        email:
+          type: string
+        mobile_number:
+          type: string
+        enable_offline_punching:
+          type: boolean
+        enable_bulk_offline_punching:
+          type: boolean
+
+    promotersCategory:
+      type: object
+      required:
+        - name
+        - maxTicketAssigned
+        - minPrice
+        - maxPrice
+      properties:
+        name:
+          type: string
+        maxTicketAssigned:
+          type: string
+        minPrice:
+          type: string
+        maxPrice:
+          type: string
