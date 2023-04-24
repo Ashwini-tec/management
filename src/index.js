@@ -11,3 +11,5 @@ export { default as tickets } from '../src/tickets/ticketsRoutes.js';
 export { default as artist } from '../src/artist/artistRoutes.js';
 export { default as eventListing } from '../src/eventListing/eventListingRoutes.js';
 export { default as promoter } from '../src/promoter/promoterRoutes.js';
+export { default as purchaseTicket } from '../src/purchaseTicket/purchaseTicketRoutes.js';
+ 

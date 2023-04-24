@@ -932,6 +932,41 @@ paths:
         200:
           description: OK
 
+  /purchaseTicket:
+    post:
+      tags:
+        - Purchase Ticket
+      summary: Create a data for category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/purchaseTicket"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Purchase Ticket
+      summary: get all data for purchaseTicket
+      responses:
+        200:
+          description: OK
+
+  /purchaseTicket/{:id}:
+    get:
+      tags:
+        - Purchase Ticket
+      summary: get by id data for purchaseTicket
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
 components:
   securitySchemes:
     authorization:
@@ -1385,4 +1420,27 @@ components:
         minPrice:
           type: string
         maxPrice:
+          type: string
+
+    purchaseTicket:
+      type: object
+      required:
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        promoted_by:
+          type: string
+        mobile:
+          type: string
+        ticket_category:
+          type: string
+        no_of_ticket:
+          type: string
+        amount:
+          type: string
+        payment_received:
+          type: string
+        payment_mode:
           type: string
