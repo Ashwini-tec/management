@@ -1,6 +1,7 @@
 import GuestUser from './guestUserDb.js';
 import { MESSAGE } from '../../utils/constants.js';
 import bcrypt from 'bcrypt';
+import Promoter from '../promoter/promoterDb.js';
 
 /**
  *
@@ -43,6 +44,10 @@ const getGuestUser = async() => {
 const getById = async(id) => {
     try {
         const detail = await GuestUser.findById({ _id: id }).select({ password: 0 }).lean();
+        const isPromoter = await Promoter.findOne({ email: detail.email }).populate('eventId').lean();
+        if(isPromoter){
+            detail.promoter = isPromoter;
+        }
         return detail;
     } catch (error) {
         return error.message;

@@ -7,38 +7,38 @@ import * as authenticate from '../../middleware/auth.js';
 const router = new Router();
 
 /**
- * create gust user
+ * create guestUser
  */
 router.post(
-    '/gust user',
+    '/guestUser',
     authenticate.verifyUser,
     validation(guestUserSchema.create()),
     guestUser.createGuestUser
 );
 
 /**
- * get gust user detail
+ * get guestUser detail
  */
 router.get(
-    '/gust user',
+    '/guestUser',
     authenticate.verifyUser,
     guestUser.getGuestUser
 );
 
 /**
- * get gust user by id
+ * get guestUser by id
  */
 router.get(
-    '/gust user/:id',
+    '/guestUser/:id',
     authenticate.verifyUser,
     guestUser.getById
 );
 
 /**
- * update gust user detail
+ * update guestUser detail
  */
 router.put(
-    '/gust user/:id',
+    '/guestUser/:id',
     authenticate.verifyUser,
     validation(guestUserSchema.update()),
     guestUser.updateGuestUser
@@ -46,10 +46,10 @@ router.put(
 
 
 /**
- * delete guest gust user detail
+ * delete guest guestUser detail
  */
 router.delete(
-    '/gust user/:id',
+    '/guestUser/:id',
     authenticate.verifyUser,
     guestUser.deleteGuestUser
 );
