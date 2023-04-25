@@ -1425,8 +1425,11 @@ components:
     purchaseTicket:
       type: object
       required:
+        - eventId
       properties:
         name:
+          type: string
+        eventId:
           type: string
         email:
           type: string

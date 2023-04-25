@@ -7,6 +7,7 @@ import Joi from 'joi';
 const create = () =>{
     return Joi.object({
         name: Joi.string(),
+        eventId: Joi.string().required(),
         email: Joi.string(),
         promoted_by: Joi.string(),
         mobile: Joi.string(),
@@ -25,6 +26,7 @@ const create = () =>{
 const update = () => {
     return Joi.object({
         name: Joi.string(),
+        eventId: Joi.string().required(),
         email: Joi.string(),
         promoted_by: Joi.string(),
         mobile: Joi.string(),

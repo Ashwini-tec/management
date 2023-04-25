@@ -1,0 +1,170 @@
+<html>
+   <head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   </head>
+   <body style="background-color :  #f3f3f3;">
+      <table align="center" width="100%" style="max-width :  600px; min-width :  600px; font-family :  Helvetica,  Arial,  sans-serif; font-size :  16px; color :  #626a6d; ">
+         <tbody>
+            <tr>
+               <td></td>
+            </tr>
+            <tr>
+               <td style="padding :  10px 0; ">
+                  <table width="100%" cellspacing="0" cellpadding="0">
+                     <tbody>
+                        <tr>
+                           <td style="background-color :  #0a1e5e; padding :  10px; border-top-right-radius :  8px; border-top-left-radius :  8px; ">
+                              <table align="center" width="100%" style="max-width :  480px; ">
+                                 <tbody>
+                                    <tr>
+                                       <td>
+                                          <h2 style="font-weight :  600; font-size :  26px; color :  #ffffff;margin-bottom: 0px;padding-top: 0px;">SaltBag</h2>
+                                       </td>
+                                       <td align="right">
+                                          <table>
+                                             <tbody>
+                                                <tr>
+                                                   <td colspan="2" style="font-size :  13px; color :  rgb(255, 255, 255); ">Download our App</td>
+                                                </tr>
+                                                <tr>
+                                                   <td><a href="https://play.google.com/store/apps/details?id=com.crewdewtech.unilife" target="_blank"><i class="fa fa-android" style="color: fff;background: #31d7a9;padding: 10px 12px; border-radius: 17px;"></i></a></td>
+                                                   <td align="center"><a href="https://apps.apple.com/in/app/unilife-student-deals-more/id1598086725" target="_blank"><i class="fa fa-apple" style="color: fff;background: #31d7a9;padding: 10px 12px; border-radius: 17px;"></i></a></td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="background-color :  #ffffff; padding :  0 15px; ">
+                              <table width="100%">
+                                 <tbody>
+                                    <tr>
+                                       <td style="padding-top :  5px; padding-bottom :  5px; ">
+                                          <h2 style="font-weight :  600; font-size :  26px; color :  #000000; ">Hi <%= body.name %>,</h2>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Thank you for buying tickets on SaltBag.  </td>
+                                    </tr>
+                                    <tr>
+                                       <td style="padding-top :  8px; padding-bottom :  8px; ">Your purchases are below, please remember to carry a valid photo Id with you.</td>
+                                    </tr>
+                                    <tr>
+                                       <td style="height :  30px; ">  &nbsp; </td>
+                                    </tr>
+                                    <tr>
+                                       <td style="border-top :  1px solid #DEDEDE; border-bottom :  1px solid #DEDEDE; padding-top :  22px; padding-bottom :  22px; ">
+                                          <table border="0" cellpadding="5" cellspacing="0" width="100%" style="color :  #555555; font-size :  15px; ">
+                                             <tbody>
+                                                <tr>
+                                                   <td style="color :  #232323; "><strong>Order ID:</strong><%= body.orderId %></td>
+                                                   <td style="color :  #232323; "> </td>
+                                                </tr>
+                                                <tr>
+                                                   <td colspan="2" style="height :  44px; font-weight :  bold; font-size :  18px; text-align :  left; color :  #232323; ">
+                                                      <a href="https://dfhdfeh.r.bh.d.sendibt3.com/tr/cl/c0MTDthDpj2E1QSTuWq2QjyZoUfvkIw7sx0uFCXNLYO5gY2X9ydItUDw-m5TIfh9mONTZ-ls-qRRsD-cTGb_WZ-eWOZUwcQj4XmZHa-Lzl-p4k2jgfANytc3Ch5LyrermfGLdZzFdK727TEAOLSbAFQh_PSrOr_yEOR3g9Z_vWrZhgwTF6eFwjKvhtlF5UxmyhaaXpepqh0nr8vPMphn_3RFWf_U4PKIKFobtIfDf4gOiY1a-kV1xL4A5Lks6c8" style="color :  #151515; text-decoration :  none; " target="_blank">DE Event</a>
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td colspan="2"><span><%= body?.eventDetails?.start_date %></span> - <span><%= body?.eventDetails?.end_date %> </span> | <%= body?.eventDetails?.select_venue %> </td>
+                                                </tr>
+                                                <tr>
+                                                   <!-- <td colspan="2">Pune, Pune, Maharashtra, India</td> -->
+                                                   <td colspan="2"><%= body?.eventDetails?.venue_address %></td>
+                                                </tr>
+                                                <tr>
+                                                   <td colspan="2"><%= body.no_of_ticket %>  Tickets </td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>
+                                          <h2 style="margin-bottom :  10px; margin-top :  15px; ">Order Detail</h2>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td style="padding-bottom :  15px; ">
+                                          <table border="0" cellpadding="10" cellspacing="0" width="100%" style="border :  1px solid #DEDEDE; font-size :  14px; color :  #555555; ">
+                                             <thead>
+                                                <tr style="color :  #444; font-size :  15px; ">
+                                                   <td bgcolor="#FFFFFF">Ticket Name</td>
+                                                   <td bgcolor="#FFFFFF">Quantity</td>
+                                                   <td bgcolor="#FFFFFF">Total Price</td>
+                                                </tr>
+                                             </thead>
+                                             <tbody>
+                                                <tr style="color :  #444; font-size :  15px; ">
+                                                   <td bgcolor="#FFFFFF"><strong><%= body.ticket_category %></strong> </td>
+                                                   <td bgcolor="#FFFFFF"><%= body.no_of_ticket %></td>
+                                                   <td bgcolor="#FFFFFF">INR <%= body.amount %></td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                       <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                       <td>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="height :  3px; background-color :  #c5c0d2; border-bottom :  3px solid #9a9a9a; "></td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <table width="100%">
+                                 <tbody>
+                                    <tr>
+                                       <td style="padding-top :  8px; padding-bottom :  8px; ">
+                                          <table width="100%">
+                                             <tbody>
+                                                <tr>
+                                                   <td align="left" width="60%" style="font-size :  14px; color :  #6b6b6b; "><span style="color :  #2f66f0; display :  inline-block; margin-bottom :  5px; "><a href="mailto:support@saltbag.com" target="_blank">support@saltbag.com</a></span><br></td>
+                                                   <td align="right">
+                                                      <table width="100%">
+                                                         <tbody>
+                                                            <tr>
+                                                               <td align="right"><a href="javascript:void(0)" target="_blank"> <i class="fa fa-facebook" style="color: fff;background: #31d7a9;padding: 10px 12px; border-radius: 17px;"></i></a></td>
+                                                               <td align="right"><a href="javascript:void(0)" target="_blank"> <i class="fa fa-twitter" style="color: fff;background: #31d7a9;padding: 10px 12px; border-radius: 17px;"></i></a></td>
+                                                               <td align="right"><a href="javascript:void(0)" target="_blank"> <i class="fa fa-linkedin" style="color: fff;background: #31d7a9;padding: 10px 12px; border-radius: 17px;"></i></a></td>
+                                                               <td align="right"><a href="javascript:void(0)" target="_blank"> <i class="fa fa-instagram" style="color: fff;background: #31d7a9;padding: 10px 12px; border-radius: 17px;"></i></a></td>
+                                                            </tr>
+                                                         </tbody>
+                                                      </table>
+                                                   </td>
+                                                </tr> 
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td></td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      </div>
+   </body>
+</html>

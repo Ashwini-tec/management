@@ -12,6 +12,10 @@ const MESSAGE = {
     SUCCESS_PASSWORD_CHANGE: 'Password changed successfully',
     INCORRECT_OTP: 'Incorrect OTP',
     OTP_VALIDATION_SUCCESS: 'OTP verify successFully',
+    TICKET_COUNT_EXCEED: 'Ticket count exceeded',
+    AMOUNT_EXCEED: 'Amount exceeded',
+    CATEGORY_NOT_AVAILABLE: 'Category not available for promoter',
+    EVENT_NOT_FOUND: 'Event not found',
 };
 
 export { MESSAGE };

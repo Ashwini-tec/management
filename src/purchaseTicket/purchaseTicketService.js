@@ -1,5 +1,9 @@
 import PurchaseTicket from './purchaseTicketDb.js';
-// import { MESSAGE } from '../../utils/constants.js';
+import { MESSAGE } from '../../utils/constants.js';
+import * as mailer from '../../utils/email.js';
+import QRCode from 'qrcode';
+import Promoter from '../promoter/promoterDb.js';
+import EventListing from '../eventListing/eventListingDb.js';
 
 /**
  *
@@ -10,8 +14,45 @@ const purchaseTicket = async(data) => {
     try {
         const count = await PurchaseTicket.countDocuments({});
         let type = (data.payment_mode == 'offline') ? 'P' : 'U';
-        const orderId = `SB${type}000${count}`;
-        data.orderId = orderId; 
+        let arr = [];
+        const countData = Array.from(String(count), Number);
+        const len =  6 - countData.length;
+        arr.length = len;
+        arr.fill(0,0);
+        arr = [...arr, ...countData];
+        const orderId = `SB${type}${arr.join('')}`;
+        data.orderId = orderId;
+        
+        const isPromoter = await Promoter.findOne({email:data.email}).lean();
+        if(isPromoter){
+            const noOfTickets = parseInt(data.no_of_ticket);
+            const ticketCategory = data.ticket_category;
+            const amount = parseInt(data.amount);
+            const promoterCategory = isPromoter.category;
+            const isType = promoterCategory.find( i=> i.ticketCategory == ticketCategory);
+            if(!isType){
+                return MESSAGE.CATEGORY_NOT_AVAILABLE;
+            }
+
+            if(parseInt(isType.minPrice) > amount && parseInt(isType.maxPrice) < amount ){
+                return MESSAGE.AMOUNT_EXCEED;
+            }
+
+            if( parseInt(isType.maxTicketAssigned) < noOfTickets ){
+                return MESSAGE.TICKET_COUNT_EXCEED;
+            }
+        }
+        const eventDetail = await EventListing.findOne({ _id: data.eventId }).lean();
+        if(!eventDetail){
+            return MESSAGE.EVENT_NOT_FOUND;
+        }
+        data.eventDetails = eventDetail;
+        const qr = await generateQR(data.orderId);
+        console.log(qr);
+        let mail = await mailer.invoiceMail(data.email, data, qr);
+        if(!mail.sent){
+            return mail.message;
+        }
         const detail = await PurchaseTicket.create(data);
         return detail;
     } catch (error) {
@@ -43,6 +84,15 @@ const getById = async(id) => {
         return detail;
     } catch (error) {
         return error.message;
+    }
+};
+
+/*********** Qr generator ******* */
+const generateQR = async text => {
+    try {
+        return await QRCode.toString(text);
+    } catch (err) {
+        return err.message;
     }
 };
 

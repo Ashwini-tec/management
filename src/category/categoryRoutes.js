@@ -11,6 +11,7 @@ const router = new Router();
  */
 router.post(
     '/category',
+    authenticate.verifyUser,
     validation(categorySchema.create()),
     categoryController.createCategory
 );

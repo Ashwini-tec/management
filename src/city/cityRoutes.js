@@ -11,6 +11,7 @@ const router = new Router();
  */
 router.post(
     '/city',
+    authenticate.verifyUser,
     validation(citySchema.create()),
     cityController.createCity
 );

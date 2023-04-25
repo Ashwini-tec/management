@@ -11,6 +11,7 @@ const router = new Router();
  */
 router.post(
     '/promoter',
+    authenticate.verifyUser,
     validation(promoterSchema.create()),
     promoterController.createPromoter
 );

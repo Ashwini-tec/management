@@ -5,6 +5,10 @@ const purchaseTicketSchema = new mongoose.Schema({
     name: {
         type: String,
     },
+    eventId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'eventListing',
+    },
     order_Id:{
         type: String,
     },

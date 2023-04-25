@@ -11,6 +11,7 @@ const router = new Router();
  */
 router.post(
     '/purchaseTicket',
+    authenticate.verifyUser,
     validation(purchaseTicketSchema.create()),
     purchaseTicketController.purchaseTicket
 );

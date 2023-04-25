@@ -11,6 +11,7 @@ const router = new Router();
  */
 router.post(
     '/vendorProfile',
+    authenticate.verifyUser,
     validation(vendorProfileSchema.create()),
     vendorProfileController.createVendorProfile
 );
