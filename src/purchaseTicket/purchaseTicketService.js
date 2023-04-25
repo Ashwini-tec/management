@@ -24,10 +24,10 @@ const purchaseTicket = async(data) => {
         data.orderId = orderId;
         
         const isPromoter = await Promoter.findOne({email:data.email}).lean();
-        if(isPromoter){
-            const noOfTickets = parseInt(data.no_of_ticket);
-            const ticketCategory = data.ticket_category;
-            const amount = parseInt(data.amount);
+        if(isPromoter && type === 'offline'){
+            const noOfTickets = parseInt(data?.tickets[0]?.no_of_ticket);
+            const ticketCategory = data?.tickets[0]?.ticket_category;
+            const amount = parseInt(data?.tickets[0]?.amount);
             const promoterCategory = isPromoter.category;
             const isType = promoterCategory.find( i=> i.ticketCategory == ticketCategory);
             if(!isType){
@@ -42,6 +42,10 @@ const purchaseTicket = async(data) => {
                 return MESSAGE.TICKET_COUNT_EXCEED;
             }
         }
+        data.no_of_ticket = data.tickets?.reduce( ( acc, curr)=>{
+            acc += parseInt(curr?.no_of_ticket) ?? 0;
+            return acc;
+        },0);
         const eventDetail = await EventListing.findOne({ _id: data.eventId }).lean();
         if(!eventDetail){
             return MESSAGE.EVENT_NOT_FOUND;
@@ -49,6 +53,7 @@ const purchaseTicket = async(data) => {
         data.eventDetails = eventDetail;
         const qr = await generateQR(data.orderId);
         console.log(qr);
+        
         let mail = await mailer.invoiceMail(data.email, data, qr);
         if(!mail.sent){
             return mail.message;

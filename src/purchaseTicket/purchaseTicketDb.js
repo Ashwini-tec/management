@@ -21,14 +21,24 @@ const purchaseTicketSchema = new mongoose.Schema({
     mobile:{
         type: String,
     },
-    ticket_category:{
-        type: String,
-    },
-    no_of_ticket:{
-        type: String,
-    },
-    amount:{
-        type: String,
+    tickets: [
+        {
+            ticket_category:{
+                type: String,
+            },
+            no_of_ticket:{
+                type: String,
+            },
+            amount:{
+                type: String,
+            },
+            totalAmount:{
+                type: String,
+            }
+        }
+    ],
+    grandTotal: {
+        type:String,
     },
     payment_received:{
         type: String,

@@ -11,11 +11,15 @@ const create = () =>{
         email: Joi.string(),
         promoted_by: Joi.string(),
         mobile: Joi.string(),
-        ticket_category: Joi.string(),
-        no_of_ticket: Joi.string(),
-        amount: Joi.string(),
+        tickets: Joi.array().items({
+            ticket_category: Joi.string(),
+            no_of_ticket: Joi.string(),
+            amount: Joi.string(),
+            grandTotal: Joi.string(),
+        }),
         payment_received: Joi.string(),
         payment_mode: Joi.string(),
+        grandTotal: Joi.string(),
     });
 };
 
@@ -30,11 +34,15 @@ const update = () => {
         email: Joi.string(),
         promoted_by: Joi.string(),
         mobile: Joi.string(),
-        ticket_category: Joi.string(),
-        no_of_ticket: Joi.string(),
-        amount: Joi.string(),
+        tickets: Joi.array().items({
+            ticket_category: Joi.string(),
+            no_of_ticket: Joi.string(),
+            amount: Joi.string(),
+            grandTotal: Joi.string(),
+        }),
         payment_received: Joi.string(),
         payment_mode: Joi.string(),
+        grandTotal: Joi.string(),
     });
 };
 

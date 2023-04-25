@@ -6,6 +6,7 @@ info:
 
 servers:
   - url: "http://localhost:9000/api/"
+  - url: "http://167.172.220.75:9000/api/"
 
 security:
     - authorization: []
@@ -1437,13 +1438,22 @@ components:
           type: string
         mobile:
           type: string
-        ticket_category:
-          type: string
-        no_of_ticket:
-          type: string
-        amount:
-          type: string
         payment_received:
           type: string
         payment_mode:
           type: string
+        grandTotal:
+          type: string
+        tickets:
+          type: array
+          items:
+            type: object
+            properties:
+              ticket_category:
+                type: string
+              no_of_ticket:
+                type: string
+              amount:
+                type: string
+              grandTotal:
+                type: string

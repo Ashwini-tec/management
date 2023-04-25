@@ -79,6 +79,9 @@
                                                 <tr>
                                                    <td colspan="2"><%= body.no_of_ticket %>  Tickets </td>
                                                 </tr>
+                                                <tr>
+                                                   <td colspan="2">Grand Total: <%= body.grandTotal %> </td>
+                                                </tr>
                                              </tbody>
                                           </table>
                                        </td>
@@ -96,14 +99,18 @@
                                                    <td bgcolor="#FFFFFF">Ticket Name</td>
                                                    <td bgcolor="#FFFFFF">Quantity</td>
                                                    <td bgcolor="#FFFFFF">Total Price</td>
+                                                   <td bgcolor="#FFFFFF">Grand Total</td>
                                                 </tr>
                                              </thead>
                                              <tbody>
-                                                <tr style="color :  #444; font-size :  15px; ">
-                                                   <td bgcolor="#FFFFFF"><strong><%= body.ticket_category %></strong> </td>
-                                                   <td bgcolor="#FFFFFF"><%= body.no_of_ticket %></td>
-                                                   <td bgcolor="#FFFFFF">INR <%= body.amount %></td>
-                                                </tr>
+                                                <% for(let i=0; i< body.tickets.length; i++) {%>
+                                                   <tr style="color :  #444; font-size :  15px; ">
+                                                      <td bgcolor="#FFFFFF"><strong><%= body?.tickets[i]?.ticket_category %></strong> </td>
+                                                      <td bgcolor="#FFFFFF"><%= body.tickets[i]?.no_of_ticket %></td>
+                                                      <td bgcolor="#FFFFFF">INR <%= body.tickets[i]?.amount %></td>
+                                                      <td bgcolor="#FFFFFF">INR <%= body.tickets[i]?.grandTotal %></td>
+                                                   </tr>
+                                                <% } %>
                                              </tbody>
                                           </table>
                                        </td>
