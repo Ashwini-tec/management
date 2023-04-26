@@ -40,6 +40,8 @@ const getById = async(id) => {
             .populate('category')
             .populate('city')
             .populate('tags.id')
+            .populate('language')
+            .populate('sorting')
             .lean();
         const tickets = await Tickets.find({ eventId: id}).lean();
         detail.tickets = tickets;

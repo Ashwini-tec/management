@@ -77,6 +77,14 @@ const eventListingSchema = new mongoose.Schema({
     longitude: {
         type: String,
     },
+    language:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'language',
+    },
+    sorting:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'sorting',
+    },
     artist:[],
     partner:[],
     isActive:{

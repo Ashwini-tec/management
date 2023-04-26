@@ -1032,6 +1032,70 @@ paths:
         200:
           description: OK
 
+  /sorting:
+    post:
+      tags:
+        - Sorting
+      summary: Create a data for sorting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/sorting"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Sorting
+      summary: get all data for sorting
+      responses:
+        200:
+          description: OK
+
+  /sorting/{:id}:
+    get:
+      tags:
+        - Sorting
+      summary: get by id data for sorting
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Sorting
+      summary: update data for sorting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/sorting"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - Sorting
+      summary: delete sorting
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
 components:
   securitySchemes:
     authorization:
@@ -1523,6 +1587,14 @@ components:
                 type: string
 
     language:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+
+    sorting:
       type: object
       required:
         - name
