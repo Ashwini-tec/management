@@ -7,6 +7,7 @@ import Joi from 'joi';
 const create = () =>{
     return Joi.object({
         userId: Joi.string().allow(''),
+        status: Joi.string().allow(''),
         isGST: Joi.string().allow(''),
         GSTIN: Joi.string().allow(''),
         PAN: Joi.string().allow(''),
@@ -32,6 +33,7 @@ const create = () =>{
 const update = () => {
     return Joi.object({
         userId: Joi.string().allow(''),
+        status: Joi.string().allow(''),
         isGST: Joi.string().allow(''),
         GSTIN: Joi.string().allow(''),
         PAN: Joi.string().allow(''),

@@ -6,6 +6,9 @@ const VendorProfileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'guest_user',
     },
+    status:{
+        type: String,
+    },
     isGST: {
         type: Boolean,
     },

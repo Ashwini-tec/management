@@ -14,3 +14,4 @@ export { default as promoter } from '../src/promoter/promoterRoutes.js';
 export { default as purchaseTicket } from '../src/purchaseTicket/purchaseTicketRoutes.js';
 export { default as language } from '../src/language/languageRoutes.js';
 export { default as sorting } from '../src/sorting/sortingRoutes.js';
+export { default as dashboard } from '../src/dashboard/dashboardRoutes.js'; 

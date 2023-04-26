@@ -1142,6 +1142,59 @@ paths:
         200:
           description: OK
 
+  /utiles:
+    post:
+      tags:
+        - Utils
+      summary: Create a data for utils
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/utils"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Utils
+      summary: get all data for utils
+      responses:
+        200:
+          description: OK
+
+  /dashboard:
+    get:
+      tags:
+        - Dashboard
+      summary: get all data for dashboard
+      responses:
+        200:
+          description: OK
+
+  /subscribe:
+    post:
+      tags:
+        - Subscribe
+      summary: Create a data for subscribe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/subscribe"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Subscribe
+      summary: get all data for subscribe
+      responses:
+        200:
+          description: OK
+
 components:
   securitySchemes:
     authorization:
@@ -1646,4 +1699,20 @@ components:
         - name
       properties:
         name:
+          type: string
+
+    utils:
+      type: object
+      required:
+        - obj
+      properties:
+        obj:
+          type: object
+
+    subscribe:
+      type: object
+      required:
+        - email
+      properties:
+        email:
           type: string
