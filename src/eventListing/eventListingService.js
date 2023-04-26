@@ -36,7 +36,11 @@ const getEventListing = async() => {
  */
 const getById = async(id) => {
     try {
-        const detail = await EventListing.findById({ _id: id }).lean();
+        const detail = await EventListing.findById({ _id: id })
+            .populate('category')
+            .populate('city')
+            .populate('tags.id')
+            .lean();
         const tickets = await Tickets.find({ eventId: id}).lean();
         detail.tickets = tickets;
         return detail;

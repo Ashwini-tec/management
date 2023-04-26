@@ -968,6 +968,70 @@ paths:
         200:
           description: OK
 
+  /language:
+    post:
+      tags:
+        - Language
+      summary: Create a data for language
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/language"
+      responses:
+        200:
+          description: OK
+
+    get:
+      tags:
+        - Language
+      summary: get all data for language
+      responses:
+        200:
+          description: OK
+
+  /language/{:id}:
+    get:
+      tags:
+        - Language
+      summary: get by id data for language
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Language
+      summary: update data for language
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/language"
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    delete:
+      tags:
+        - Language
+      summary: delete language
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
 components:
   securitySchemes:
     authorization:
@@ -1457,3 +1521,11 @@ components:
                 type: string
               grandTotal:
                 type: string
+
+    language:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
