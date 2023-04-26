@@ -746,6 +746,52 @@ paths:
       tags:
         - Event Listing
       summary: get all data for eventListing
+      parameters:
+        - in: query
+          name: language
+          schema:
+            type: array
+          description: filter according to language
+        - in: query
+          name: sorting
+          schema:
+            type: array
+          description: filter according to sorting
+        - in: query
+          name: category
+          schema:
+            type: array
+          description: filter according to category
+        - in: query
+          name: city
+          schema:
+            type: array
+          description: filter according to city
+        - in: query
+          name: type
+          schema:
+            type: array
+          description: filter according to type
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: filter according to name
+        - in: query
+          name: minPrice
+          schema:
+            type: number
+          description: filter according to minPrice
+        - in: query
+          name: maxPrice
+          schema:
+            type: number
+          description: filter according to maxPrice
+        - in: query
+          name: date
+          schema:
+            type: string
+          description: filter according to date
       responses:
         200:
           description: OK
@@ -1398,7 +1444,7 @@ components:
           end_time:
             type: string
           price:
-            type: string
+            type: number
           gst_type:
             type: string
           gst_included:

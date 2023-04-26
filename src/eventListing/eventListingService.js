@@ -20,9 +20,45 @@ const createEventListing = async(data) => {
  *
  * @returns
  */
-const getEventListing = async() => {
+const getEventListing = async(params) => {
     try {
-        const detail = await EventListing.find({}).select({ artist: 0, partner: 0}).lean();
+        let query = {};
+        if(params?.sorting){
+            query.sorting = { $in: params?.sorting };
+        }
+        if(params?.language){
+            query.language = { $in: params?.language };
+        }
+        if(params?.category){
+            query.category = { $in: params?.category };
+        }
+        if(params?.city){
+            query.city = { $in: params?.city };
+        }
+        if(params?.name){
+            query.name = { $in: params?.name };
+        }
+        if(params?.type){
+            query.type = { $in: params?.type };
+        }
+        if(params?.maxPrice && params?.minPrice){
+            const eventDEtails = await Tickets.find({ price: { $gte: params?.minPrice, $lte: params?.maxPrice }}).lean();
+            const eventIds = eventDEtails.map(ele => ele.eventId);
+            query._id = { $in: eventIds };
+        }
+        if(params?.date){
+            const timeStamp = Date.now();
+            let date;
+            if(params?.date?.toLowercase() == 'today' ){
+                date = new Date();
+            } else if (params?.date?.toLowercase() == 'tomorrow' ){
+                date = new Date(timeStamp + 86400000);
+            }else{
+                date = new Date(timeStamp + 86400000 * 7);
+            }
+            query.date = date;
+        }
+        const detail = await EventListing.find(query).select({ artist: 0, partner: 0}).lean();
         return detail;
     } catch (error) {
         return error.message;

@@ -30,7 +30,8 @@ const createEventListing = async(req, res) => {
  */
 const getEventListing = async(req, res) => {
     try {
-        const detail = await eventListingSevice.getEventListing();
+        const params = req.query;
+        const detail = await eventListingSevice.getEventListing(params);
         return res.status(200).json({
             data: detail ?? [],
         });

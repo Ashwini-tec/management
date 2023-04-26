@@ -29,7 +29,7 @@ const ticketSchema = new mongoose.Schema({
         type: String,
     },
     price:{
-        type: String,
+        type: Number,
     },
     gst_type:{
         type: String,
