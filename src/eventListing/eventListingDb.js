@@ -85,6 +85,9 @@ const eventListingSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'sorting',
     },
+    amount:{
+        type: String,
+    },
     artist:[],
     partner:[],
     isActive:{

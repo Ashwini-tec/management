@@ -14,6 +14,7 @@ const create = () =>{
         email: Joi.string().email().required(),
         password: Joi.string().required(),
         permissions: Joi.array(),
+        role: Joi.string(),
     });
 };
 
@@ -31,6 +32,8 @@ const update = () => {
         email: Joi.string().email().required(),
         password: Joi.string().required(),
         permissions: Joi.array(),
+        isActive: Joi.boolean(),
+        role: Joi.string(),
     });
 };
 

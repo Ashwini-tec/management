@@ -23,7 +23,7 @@ const create = () =>{
         secondary_add_info:Joi.string(),
         enable_ticket:Joi.boolean(),
         phase_slab_type: Joi.boolean(),
-        next_ticket_slab:Joi.string(),
+        next_ticket_slab:Joi.string().allow(''),
     });
 };
 
@@ -50,7 +50,7 @@ const update = () => {
         secondary_add_info:Joi.string(),
         enable_ticket:Joi.boolean(),
         phase_slab_type: Joi.boolean(),
-        next_ticket_slab:Joi.string(),
+        next_ticket_slab:Joi.string().allow(''),
     });
 };
 

@@ -87,10 +87,26 @@ const deleteVendorProfile = async(id) => {
     }
 };
 
+/**
+ *
+ * @param {*} id
+ * @returns
+ */
+const getVendorByGuestProfile = async(id) => {
+    try {
+        const detail = await VendorProfile.findOne({ userId: id }).populate('userId').populate('state').lean();
+        return detail;
+    } catch (error) {
+        return error.message;
+    }
+};
+
+
 export{
     createVendorProfile,
     getVendorProfile,
     getById,
     updateVendorProfile,
     deleteVendorProfile,
+    getVendorByGuestProfile,
 };

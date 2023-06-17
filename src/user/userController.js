@@ -33,7 +33,7 @@ const getUser = async(req, res) => {
     try {
         const detail = await userSevice.getUser();
         return res.status(200).json({
-            data: detail ?? [],
+            data: detail,
         });
 
     } catch (error) {

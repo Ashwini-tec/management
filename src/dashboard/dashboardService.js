@@ -15,13 +15,18 @@ const createDashboard = async() => {
         const publishedQuery = { status : 'Published' };
         const unPublishedQuery = { status : 'UnPublished' };
         const soldOutQuery = { status : 'SoldOut' };
-        const cancelledQuery = { status : 'cancelled' };
+        const cancelledQuery = { status : 'Cancelled' };
 
-        const vendorPublishCount = await VendorProfile.countDocuments(publishedQuery);
-        const vendorUnPublishCount = await VendorProfile.countDocuments(unPublishedQuery);
-        const vendorSoldOutCount = await VendorProfile.countDocuments(soldOutQuery);
-        const vendorCancelledCount = await VendorProfile.countDocuments(cancelledQuery);
+        const totalEventQuery = {};
+        const totalApprovedQuery = { status : 'Approved' };
+        const totalPendingQuery = { status : 'Pending' };
+        const totalRejectedQuery = { status : 'Rejected' };
 
+        const totalApprovedCount = await VendorProfile.countDocuments(totalApprovedQuery);
+        const totalPendingCount = await VendorProfile.countDocuments(totalPendingQuery);
+        const totalRejectedCount = await VendorProfile.countDocuments(totalRejectedQuery);
+
+        const totalEventCount = await EventListing.countDocuments(totalEventQuery);
         const eventPublishCount = await EventListing.countDocuments(publishedQuery);
         const eventUnPublishCount = await EventListing.countDocuments(unPublishedQuery);
         const eventSoldOutCount = await EventListing.countDocuments(soldOutQuery);
@@ -29,10 +34,10 @@ const createDashboard = async() => {
 
         const customer = await GuestUser.find({}).lean();
         const detail = {
-            vendorPublishCount,
-            vendorUnPublishCount,
-            vendorSoldOutCount,
-            vendorCancelledCount,
+            totalEventCount,
+            totalApprovedCount,
+            totalPendingCount,
+            totalRejectedCount,
             eventPublishCount,
             eventUnPublishCount,
             eventSoldOutCount,
@@ -53,6 +58,27 @@ const subscribe = async(data) => {
     try {
         const subscribeData = await Subscribe.findOne({ email : data.email }).lean();
         if(subscribeData){
+            if(subscribeData.isActive == false){
+                return MESSAGE.DATA_ALREADY_EXIST;
+            }
+            const info = await Subscribe.findOneAndUpdate({ email : data.email },{$set:{ isActive: false }},{ new:true}).lean();
+            return info;
+        }
+        const detail = await Subscribe.create(data);
+        return detail;
+    } catch (error) {
+        return error.message;
+    }
+};
+
+/**
+ *
+ * @returns
+ */
+const unsubscribe = async(data) => {
+    try {
+        const subscribeData = await Subscribe.updateOne({ email : data.email },{$set:{ isActive: false }}).lean();
+        if(subscribeData){
             return MESSAGE.DATA_ALREADY_EXIST;
         }
         const detail = await Subscribe.create(data);
@@ -67,9 +93,13 @@ const subscribe = async(data) => {
  * @param {*} id
  * @returns
  */
-const getSubscriber = async() => {
+const getSubscriber = async(params) => {
     try {
-        const detail = await Subscribe.getSubscriber().lean();
+        let query={};
+        if(params?.email){
+            query= {email: params.email};
+        }
+        const detail = await Subscribe.find(query).lean();
         return detail;
     } catch (error) {
         return error.message;
@@ -86,7 +116,7 @@ const utiles = async(data) => {
     try {
         const utilsData = await Utils.find({}).lean();
         if( utilsData.length == 0 ){
-            const info = Utils.create(data);
+            const info = Utils.create({obj:data});
             return info;
         }
         const detail = await Utils.findByIdAndUpdate(
@@ -105,9 +135,9 @@ const utiles = async(data) => {
  * @param {*} data
  * @returns
  */
-const getUtils = async(id) => {
+const getUtils = async() => {
     try {
-        const utilsData = await Utils.find({_id: id}).lean();
+        const utilsData = await Utils.find({}).lean();
         return utilsData;
     } catch (error) {
         return error.message;
@@ -120,4 +150,5 @@ export{
     getSubscriber,
     utiles,
     getUtils,
+    unsubscribe,
 };

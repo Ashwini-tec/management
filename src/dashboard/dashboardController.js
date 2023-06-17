@@ -45,11 +45,32 @@ const subscribe = async(req, res) => {
  *
  * @param {*} req
  * @param {*} res
- * @returns data by id
+ * @returns all the data
+ */
+const unSubscribe = async(req, res) => {
+    try {
+        const data = req.body;
+        const detail = await dashboardSevice.unSubscribe(data);
+        return res.status(200).json({
+            data: detail ?? [],
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns data all
  */
 const getSubscriber = async(req, res) => {
     try {
-        const detail = await dashboardSevice.getSubscriber();
+        const params = req.query;
+        const detail = await dashboardSevice.getSubscriber(params);
         return res.status(200).json({
             data: detail ?? MESSAGE.DATA_NOT_FOUND,
         });
@@ -91,8 +112,7 @@ const utiles = async(req, res) => {
  */
 const getUtils = async(req, res) => {
     try {
-        const { id: dashboardId } = req.params;
-        const detail = await dashboardSevice.getUtils(dashboardId);
+        const detail = await dashboardSevice.getUtils();
         return res.status(200).json({
             data: detail ?? MESSAGE.DATA_NOT_FOUND,
         });
@@ -109,4 +129,5 @@ export{
     getSubscriber,
     utiles,
     getUtils,
+    unSubscribe,
 };

@@ -49,14 +49,14 @@ const getEventListing = async(params) => {
         if(params?.date){
             const timeStamp = Date.now();
             let date;
-            if(params?.date?.toLowercase() == 'today' ){
-                date = new Date();
-            } else if (params?.date?.toLowercase() == 'tomorrow' ){
-                date = new Date(timeStamp + 86400000);
+            if(params?.date?.toLowerCase() == 'today' ){
+                date = {$lte: new Date(),$gt:new Date(timeStamp - 86400000)};
+            } else if (params?.date?.toLowerCase() == 'tomorrow' ){
+                date =  {$lte: new Date(timeStamp + 86400000), $gt: new Date()};
             }else{
-                date = new Date(timeStamp + 86400000 * 7);
+                date = {$lte: new Date(timeStamp + 86400000 * 7), $gt:new Date()};
             }
-            query.date = date;
+            query.start_date = date;
         }
         const detail = await EventListing.find(query).select({ artist: 0, partner: 0}).lean();
         return detail;
@@ -86,6 +86,30 @@ const getById = async(id) => {
         return error.message;
     }
 };
+
+
+/**
+ *
+ * @param {*} id
+ * @returns
+ */
+const getEventUserIdListing = async(id) => {
+    try {
+        const detail = await EventListing.findOne({ guestid: id })
+            .populate('category')
+            .populate('city')
+            .populate('tags.id')
+            .populate('language')
+            .populate('sorting')
+            .lean();
+        const tickets = await Tickets.find({ userId: id}).lean();
+        detail.tickets = tickets;
+        return detail;
+    } catch (error) {
+        return error.message;
+    }
+};
+
 
 /**
  *
@@ -158,4 +182,5 @@ export{
     updateEventListing,
     deleteEventListing,
     editEventListingDetails,
+    getEventUserIdListing,
 };

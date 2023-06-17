@@ -2,6 +2,8 @@ import nodemailer from 'nodemailer';
 import * as dotenv from 'dotenv';
 const process = dotenv.config();
 import ejs from 'ejs';
+import { fileURLToPath } from 'url';
+import { dirname,join } from 'path';
 
 /************************* forgot password email ********** */
 const forgotPassword = async(mailTo, body)=> {
@@ -46,7 +48,7 @@ const forgotPassword = async(mailTo, body)=> {
 };
 
 /************************ invoice mail ***************** */
-const invoiceMail = async(email, body, qr)=> {
+const invoiceMail = async(email, body, qr, pdf)=> {
     return new Promise((resolve,reject)=>{
 
         // Create a SMTP transporter object
@@ -60,9 +62,11 @@ const invoiceMail = async(email, body, qr)=> {
                 pass: process.parsed.EMAIL_PASSWORD
             }
         });
+        let rootPath = dirname(fileURLToPath(import.meta.url));
+        rootPath = join(rootPath, '..');
 
         // Message object
-        ejs.renderFile('./public/invoiceEmail.ejs', { body: body, qr: qr }, function (err, data) {
+        ejs.renderFile(`${rootPath}/public/invoiceEmail.ejs`, { body: body, qr: qr }, function (err, data) {
             if (err) {
                 console.log(err);
             } else {
@@ -71,12 +75,17 @@ const invoiceMail = async(email, body, qr)=> {
                     cc: process.parsed.EMAIL,
                     to: email,
                     subject: 'Invoice Generated',
-                    html: data
+                    html: data,
+                    attachments: [
+                        {
+                            path: `${pdf}`
+                        },
+                    ]
                 };
 
                 transporter.sendMail(message, (err, info) => {
                     if (err) {
-                        console.log('Error occurred. ' + err.message);
+                        console.log('Error occurred. ' + err);
                         return reject({
                             sent: false,
                             message: err.message

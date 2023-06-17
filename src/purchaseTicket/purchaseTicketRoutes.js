@@ -17,6 +17,27 @@ router.post(
 );
 
 /**
+ * create purchaseTicket
+ */
+router.post(
+    '/purchaseTicket/offline/:orderId',
+    authenticate.verifyUser,
+    validation(purchaseTicketSchema.mailOffline()),
+    purchaseTicketController.purchaseTicketOffline
+);
+
+/**
+ * update purchaseTicket
+ */
+router.put(
+    '/purchaseTicket/:id',
+    authenticate.verifyUser,
+    validation(purchaseTicketSchema.update()),
+    purchaseTicketController.update
+);
+
+
+/**
  * get purchaseTicket detail
  */
 router.get(
@@ -34,5 +55,14 @@ router.get(
     purchaseTicketController.getById
 );
 
+
+/**
+ * get purchaseTicket by eventId
+ */
+router.get(
+    '/purchaseTicket/:eventId/:email',
+    authenticate.verifyUser,
+    purchaseTicketController.getByEventId
+);
 
 export default router;

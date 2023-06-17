@@ -21,7 +21,7 @@ router.post(
  */
 router.get(
     '/eventListing',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     eventListingController.getEventListing
 );
 
@@ -30,7 +30,7 @@ router.get(
  */
 router.get(
     '/eventListing/:id',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     eventListingController.getById
 );
 
@@ -52,6 +52,15 @@ router.delete(
     '/eventListing/:id',
     authenticate.verifyUser,
     eventListingController.deleteEventListing
+);
+
+/**
+ * eventListing detail
+ */
+router.get(
+    '/eventListing/guest/:userId',
+    authenticate.verifyUser,
+    eventListingController.getEventUserIdListing
 );
 
 /**

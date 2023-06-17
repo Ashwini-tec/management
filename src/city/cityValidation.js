@@ -19,6 +19,7 @@ const update = () => {
     return Joi.object({
         name: Joi.string(),
         image: Joi.string(),
+        isActive: Joi.boolean(),
     });
 };
 

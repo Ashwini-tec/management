@@ -2,9 +2,7 @@ import mongoose from 'mongoose';
 
 const utilsSchema = new mongoose.Schema({
 
-    obj: {
-        type: String,
-    },
+    obj: {},
     isActive:{
         type: Boolean,
         default: true,

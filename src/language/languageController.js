@@ -1,4 +1,4 @@
-import * as languageSevice from './LanguageService.js';
+import * as languageSevice from './languageService.js';
 import { MESSAGE } from '../../utils/constants.js';
 /**
  *

@@ -21,7 +21,7 @@ router.post(
  */
 router.get(
     '/language',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     languageController.getLanguage
 );
 
@@ -30,7 +30,7 @@ router.get(
  */
 router.get(
     '/language/:id',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     languageController.getById
 );
 

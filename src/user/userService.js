@@ -100,8 +100,7 @@ const deleteUser = async(id) => {
  */
 const forgotPassword = async(email) => {
     try {
-        const max = 6;
-        const otp = Math.floor(Math.random() * max);
+        const otp = Math.floor(100000 + Math.random() * 900000);
         const info = await User.findOne({ email: email}).lean();
         if ( !info ){
             return MESSAGE.DATA_NOT_FOUND;

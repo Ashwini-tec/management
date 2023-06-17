@@ -27,6 +27,9 @@ const promoterSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    status:{
+        type: String,
+    },
     category:[],
     isActive:{
         type: Boolean,

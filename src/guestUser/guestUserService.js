@@ -2,6 +2,7 @@ import GuestUser from './guestUserDb.js';
 import { MESSAGE } from '../../utils/constants.js';
 import bcrypt from 'bcrypt';
 import Promoter from '../promoter/promoterDb.js';
+import * as mailer from '../../utils/email.js';
 
 /**
  *
@@ -66,8 +67,10 @@ const updateGuestUser = async(id, data) => {
         if( userData && id !== String(userData._id) ){
             return MESSAGE.DATA_ALREADY_EXIST;
         }
-        // bcrypt password
-        data.password = bcrypt.hashSync(data.password, 10);
+        if (data?.password){
+            // bcrypt password
+            data.password = bcrypt.hashSync(data.password, 10);
+        }
         const detail = await GuestUser.findByIdAndUpdate(
             { _id:id },
             data,
@@ -97,10 +100,63 @@ const deleteGuestUser = async(id) => {
     }
 };
 
+
+
+/**
+ *
+ * @param {*} id
+ * @returns
+ */
+const forgotPassword = async(email) => {
+    try {
+        const max = 6;
+        const otp = Math.floor(Math.random() * max);
+        const info = await GuestUser.findOne({ email: email}).lean();
+        if ( !info ){
+            return MESSAGE.DATA_NOT_FOUND;
+        }
+        const detail = await GuestUser.updateOne(
+            { email: email},
+            { $set: { opt: otp }},
+        );
+        let mail = await mailer.forgotPassword(email, otp);
+        if(!mail.sent){
+            return mail.message;
+        }
+        return detail;
+    } catch (error) {
+        return error.message;
+    }
+};
+
+/**
+ *
+ * @param {*} id
+ * @returns
+ */
+const resetPassword = async(email, password) => {
+    try {
+        const info = await GuestUser.findOne({ email: email}).lean();
+        if ( !info ){
+            return MESSAGE.DATA_NOT_FOUND;
+        }
+        const pass = bcrypt.hashSync(password, 10);
+        const detail = await GuestUser.UpdateOne(
+            { email: email},
+            { $set: { password: pass }},
+        );
+        return detail;
+    } catch (error) {
+        return error.message;
+    }
+};
+
 export{
     createGuestUser,
     getGuestUser,
     getById,
     updateGuestUser,
     deleteGuestUser,
+    resetPassword,
+    forgotPassword,
 };

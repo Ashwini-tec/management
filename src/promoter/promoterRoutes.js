@@ -35,6 +35,24 @@ router.get(
 );
 
 /**
+ * get promoter by event id
+ */
+router.get(
+    '/promoter/event/:id',
+    authenticate.verifyUser,
+    promoterController.getByEventId
+);
+
+/**
+ * get promoter by email
+ */
+router.get(
+    '/promoter/email/:email',
+    authenticate.verifyUser,
+    promoterController.getByEmailId
+);
+
+/**
  * update promoter detail
  */
 router.put(

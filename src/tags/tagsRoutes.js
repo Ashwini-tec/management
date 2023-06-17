@@ -21,7 +21,7 @@ router.post(
  */
 router.get(
     '/tags',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     tagsController.getTags
 );
 
@@ -30,7 +30,7 @@ router.get(
  */
 router.get(
     '/tags/:id',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     tagsController.getById
 );
 

@@ -14,11 +14,21 @@ const guestUserSchema = new mongoose.Schema({
     mobile: {
         type: String,
     },
+    otp:{ type: String },
     isActive:{
         type: Boolean,
         default: true,
     },
-    permissions:[],
+    userType:{
+        type: String,
+        default: 'guestUser',
+    },
+    image:{
+        type: String,
+    },
+    gender:{
+        type: String,
+    }
 
 }, { timestamps: true });
 

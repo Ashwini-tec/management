@@ -1,6 +1,7 @@
 import { MESSAGE } from '../../utils/constants.js';
 import User from '../../src/user/userDb.js';
 import bcrypt from 'bcrypt';
+import GuestUser from '../../src/guestUser/guestUserDb.js';
 
 /**
  *
@@ -27,15 +28,17 @@ const login = async(data) => {
  * @param {*} data
  * @returns
  */
-const guestLogin = async(data) => {
-    const { email, password, type} = data;
-    const user = await User.findOne({ email: email }).lean();
-    if (!user) {
-        return MESSAGE.INVALID_USER_PASSWORD;
-    }
+const guestLoginUser = async(data) => {
+    const { email, password, type } = data;
     if(type.toLowerCase() !== 'p'){
-        return user;
+        const usere = await GuestUser.findOne({ email: email }).lean();
+        if (!usere) {
+            delete data.password;
+            return await User.create(data);
+        }
+        return usere;
     }
+    const user = await GuestUser.findOne({ email: email }).lean();
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
         return MESSAGE.INVALID_USER_PASSWORD;
@@ -44,4 +47,4 @@ const guestLogin = async(data) => {
     return user;
 };
 
-export { login, guestLogin };
+export { login, guestLoginUser };

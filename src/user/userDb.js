@@ -23,12 +23,13 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
     },
     isActive:{
         type: Boolean,
         default: true,
     },
+    otp:{ type : Number },
+    role:{ type: String },
     uniqueId: {
         type: String,
     },

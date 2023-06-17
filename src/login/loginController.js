@@ -47,7 +47,7 @@ const loginUser = async(req, res) => {
 const guestLoginUser = async(req, res) => {
     try {
         const data = req.body;
-        const detail = await loginSevice.guestlogin(data);
+        const detail = await loginSevice.guestLoginUser(data);
         if(typeof detail === 'string'){
             return res.status(400).json({
                 data: detail,
@@ -57,6 +57,7 @@ const guestLoginUser = async(req, res) => {
         const userData = {
             id: detail._id,
             email: detail.email,
+            userType: detail.userType,
         };
 
         detail.password =  undefined;

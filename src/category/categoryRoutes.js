@@ -21,7 +21,7 @@ router.post(
  */
 router.get(
     '/category',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     categoryController.getCategory
 );
 
@@ -30,7 +30,7 @@ router.get(
  */
 router.get(
     '/category/:id',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     categoryController.getById
 );
 

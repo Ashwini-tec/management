@@ -8,7 +8,7 @@ const create = () =>{
     return Joi.object({
         userId: Joi.string().allow(''),
         status: Joi.string().allow(''),
-        isGST: Joi.string().allow(''),
+        isGST: Joi.boolean().allow(''),
         GSTIN: Joi.string().allow(''),
         PAN: Joi.string().allow(''),
         organizationName: Joi.string().allow(''),
@@ -34,7 +34,7 @@ const update = () => {
     return Joi.object({
         userId: Joi.string().allow(''),
         status: Joi.string().allow(''),
-        isGST: Joi.string().allow(''),
+        isGST: Joi.boolean().allow(''),
         GSTIN: Joi.string().allow(''),
         PAN: Joi.string().allow(''),
         organizationName: Joi.string().allow(''),
@@ -49,6 +49,7 @@ const update = () => {
         panImage: Joi.string().allow(''),
         cancelledChequeImage: Joi.string().allow(''),
         agreementSigning: Joi.string().allow(''),
+        isActive: Joi.boolean(),
     });
 };
 

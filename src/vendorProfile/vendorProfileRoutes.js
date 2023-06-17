@@ -44,6 +44,16 @@ router.put(
     vendorProfileController.updateVendorProfile
 );
 
+/**
+ * update vendorProfile detail
+ */
+router.get(
+    '/vendorProfile/guest/:guestId',
+    authenticate.verifyUser,
+    validation(vendorProfileSchema.update()),
+    vendorProfileController.getVendorByGuestProfile
+);
+
 
 /**
  * delete vendorProfile detail

@@ -64,6 +64,29 @@ const getById = async(req, res) => {
     }
 };
 
+
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns data by id
+ */
+const getEventUserIdListing = async(req, res) => {
+    try {
+        const { id : userId } = req.params;
+        const detail = await eventListingSevice.getEventUserIdListing(userId);
+        return res.status(200).json({
+            data: detail ?? MESSAGE.DATA_NOT_FOUND,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+
 /**
  *
  * @param {*} req
@@ -139,4 +162,5 @@ export{
     updateEventListing,
     deleteEventListing,
     editEventListingDetails,
+    getEventUserIdListing,
 };

@@ -9,6 +9,16 @@ const purchaseTicketSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'eventListing',
     },
+    guestid:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'guest_user',
+    },
+    razorpay_payment_id:{
+        type: String,
+    },
+    payment_type:{
+        type: String,
+    },
     order_Id:{
         type: String,
     },
@@ -34,6 +44,9 @@ const purchaseTicketSchema = new mongoose.Schema({
             },
             totalAmount:{
                 type: String,
+            },
+            date: {
+                type:String,
             }
         }
     ],
@@ -46,11 +59,19 @@ const purchaseTicketSchema = new mongoose.Schema({
     payment_mode:{
         type: String,
     },
+    mailSend:{
+        type: Boolean,
+        default: false,
+    },
     isActive:{
         type: Boolean,
         default: true,
     },
-
+    attended:{
+        type: Boolean,
+        default: false,
+    },
+    pdf:{}
 }, { timestamps: true });
 
 

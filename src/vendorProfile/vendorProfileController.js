@@ -105,10 +105,34 @@ const deleteVendorProfile = async(req, res) => {
     }
 };
 
+
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns data by id
+ */
+const getVendorByGuestProfile = async(req, res) => {
+    try {
+        const { id : guestId } = req.params;
+        const detail = await vendorProfileSevice.getVendorByGuestProfile(guestId);
+        return res.status(200).json({
+            data: detail ?? MESSAGE.DATA_NOT_FOUND,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+
 export{
     createVendorProfile,
     getVendorProfile,
     getById,
     updateVendorProfile,
     deleteVendorProfile,
+    getVendorByGuestProfile,
 };

@@ -21,7 +21,7 @@ router.post(
  */
 router.get(
     '/state',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     stateController.getState
 );
 
@@ -30,7 +30,7 @@ router.get(
  */
 router.get(
     '/state/:id',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     stateController.getById
 );
 

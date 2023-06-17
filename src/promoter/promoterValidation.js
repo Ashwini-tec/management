@@ -27,6 +27,7 @@ const update = () => {
         mobile_number: Joi.string(),
         enable_offline_punching: Joi.boolean(),
         enable_bulk_offline_punching: Joi.boolean(),
+        isActive: Joi.boolean(),
     });
 };
 
@@ -40,6 +41,7 @@ const category = () => {
         maxTicketAssigned: Joi.string(),
         minPrice: Joi.string(),
         maxPrice: Joi.string(),
+        status:Joi.string(),
     });
 };
 

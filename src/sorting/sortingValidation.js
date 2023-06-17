@@ -17,6 +17,7 @@ const create = () =>{
 const update = () => {
     return Joi.object({
         name: Joi.string(),
+        isActive: Joi.boolean(),
     });
 };
 

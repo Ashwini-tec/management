@@ -5,8 +5,8 @@ info:
   version: 1.0.0
 
 servers:
-  - url: "http://localhost:9000/api/"
-  - url: "http://167.172.220.75:9000/api/"
+  - url: "http://localhost:9082/api/"
+  - url: "http://167.172.220.75:9082/api/"
 
 security:
     - authorization: []
@@ -216,6 +216,48 @@ paths:
         200:
           description: OK
 
+  /guestUser/forgot/password:
+    post:
+      tags:
+        - Guest User
+      summary: generate forgot password for user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/forgotPassword"
+      responses:
+        200:
+          description: OK
+
+  /guestUser/reset/password:
+    post:
+      tags:
+        - Guest User
+      summary: reset password for user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/resetPassword"
+      responses:
+        200:
+          description: OK
+
+  /guestUser/otp/verify:
+    post:
+      tags:
+        - Guest User
+      summary: otp verify for user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/otpVerify"
+      responses:
+        200:
+          description: OK
+
   /state:
     post:
       tags:
@@ -403,6 +445,19 @@ paths:
       parameters:
         - in: path
           name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+  /vendorProfile/guest/{:guestId}:
+    get:
+      tags:
+        - Vendor Profile
+      summary: get by id data for guestId vendorProfile
+      parameters:
+        - in: path
+          name: :guestId
           required: true
       responses:
         200:
@@ -826,10 +881,24 @@ paths:
         200:
           description: OK
 
-    delete:
+  delete:
       tags:
         - Event Listing
       summary: delete eventListing
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+
+  /eventListing/event/{:id}:
+    get:
+      tags:
+        - Event Listing
+      summary: get by event id data for eventListing
       parameters:
         - in: path
           name: :id
@@ -851,6 +920,19 @@ paths:
       parameters:
         - in: path
           name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+  /eventListing/guest/{:userId}:
+    get:
+      tags:
+        - Event Listing
+      summary: get by id data for eventListing
+      parameters:
+        - in: path
+          name: :userId
           required: true
       responses:
         200:
@@ -920,6 +1002,19 @@ paths:
         200:
           description: OK
 
+  /promoter/email/{:email}:
+    get:
+      tags:
+        - Promoter
+      summary: get by email data for promoter
+      parameters:
+        - in: path
+          name: :email
+          required: true
+      responses:
+        200:
+          description: OK
+
   /promoter/category/event/{:id}:
     post:
       tags:
@@ -983,7 +1078,7 @@ paths:
     post:
       tags:
         - Purchase Ticket
-      summary: Create a data for category
+      summary: Create a data for purchaseTicket
       requestBody:
         content:
           application/json:
@@ -1009,6 +1104,57 @@ paths:
       parameters:
         - in: path
           name: :id
+          required: true
+      responses:
+        200:
+          description: OK
+
+    put:
+      tags:
+        - Purchase Ticket
+      summary: update a data for purchaseTicket
+      parameters:
+        - in: path
+          name: :id
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/purchaseTicketUpdate"
+      responses:
+        200:
+          description: OK
+
+  /purchaseTicket/offline/{:orderId}:
+    post:
+      tags:
+        - Purchase Ticket
+      summary: get by orderId data for purchaseTicket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/purchaseTicketUpdate"
+      parameters:
+        - in: path
+          name: :orderId
+          required: true
+      responses:
+        200:
+          description: OK
+
+  /purchaseTicket/{:eventId}/{:email}:
+    get:
+      tags:
+        - Purchase Ticket
+      summary: get by event id data for purchaseTicket
+      parameters:
+        - in: path
+          name: :eventId
+          required: true
+        - in: path
+          name: :email
           required: true
       responses:
         200:
@@ -1191,6 +1337,26 @@ paths:
       tags:
         - Subscribe
       summary: get all data for subscribe
+      parameters:
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: filter according to email
+      responses:
+        200:
+          description: OK
+
+  /unsubscribe:
+    post:
+      tags:
+        - Subscribe
+      summary: Create a data for unsubscribe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/subscribe"
       responses:
         200:
           description: OK
@@ -1223,6 +1389,8 @@ components:
         address:
           type: string
         mobile:
+          type: string
+        role:
           type: string
         permissions:
           type: array
@@ -1298,6 +1466,10 @@ components:
         password:
           type: string
         mobile:
+          type: string
+        image:
+          type: string
+        gender:
           type: string
         permissions:
           type: array
@@ -1375,7 +1547,7 @@ components:
           userId:
             type: string
           isGST:
-            type: string
+            type: boolean
           GSTIN:
             type: string
           PAN:
@@ -1464,6 +1636,7 @@ components:
     tickets:
       type: object
       required:
+        - eventId
         - guestId
         - ticket_type
         - ticket_name
@@ -1482,6 +1655,8 @@ components:
         - phase_slab_type
         - next_ticket_slab
       properties:
+          eventId:
+            type: string
           guestId:
             type: string
           ticket_type:
@@ -1541,10 +1716,10 @@ components:
         - select_venue_img
         - select_venue_name
         - venue_address
-        - latitude
-        - longitude
         - artist
         - partner
+        - language
+        - sorting
       properties:
         guestid:
           type: string
@@ -1557,7 +1732,7 @@ components:
         category:
           type: string
         tags:
-          type: string
+          type: array
         event_cover_img:
           type: string
         event_day_type:
@@ -1593,15 +1768,21 @@ components:
         longitude:
           type: string
         artist:
-          type: string
+          type: array
         partner:
+          type: array
+        language:
+          type: string
+        sorting:
+          type: string
+        amount:
           type: string
 
     eventListingDetails:
       type: object
       required:
         - idx
-        - key 
+        - key
       properties:
         idx:
           type: number
@@ -1640,6 +1821,7 @@ components:
         - maxTicketAssigned
         - minPrice
         - maxPrice
+        - status
       properties:
         name:
           type: string
@@ -1649,8 +1831,53 @@ components:
           type: string
         maxPrice:
           type: string
+        status:
+          type: string
 
     purchaseTicket:
+      type: object
+      required:
+        - eventId
+      properties:
+        name:
+          type: string
+        eventId:
+          type: string
+        email:
+          type: string
+        promoted_by:
+          type: string
+        mobile:
+          type: string
+        payment_received:
+          type: string
+        payment_mode:
+          type: string
+        grandTotal:
+          type: string
+        guestid:
+          type: string
+        razorpay_payment_id:
+          type: string
+        payment_type:
+          type: string
+        tickets:
+          type: array
+          items:
+            type: object
+            properties:
+              ticket_category:
+                type: string
+              no_of_ticket:
+                type: string
+              amount:
+                type: string
+              grandTotal:
+                type: string
+              date:
+                type: string
+
+    purchaseTicketUpdate:
       type: object
       required:
         - eventId
@@ -1683,6 +1910,8 @@ components:
               amount:
                 type: string
               grandTotal:
+                type: string
+              date:
                 type: string
 
     language:

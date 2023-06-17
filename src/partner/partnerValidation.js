@@ -21,6 +21,7 @@ const update = () => {
         partner_name:Joi.string(),
         partner_img:Joi.string(),
         partner_bio:Joi.string(), 
+        isActive: Joi.boolean(),
     });
 };
 

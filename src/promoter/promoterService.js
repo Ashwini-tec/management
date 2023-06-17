@@ -1,5 +1,6 @@
 import Promoter from './promoterDb.js';
 import { MESSAGE } from '../../utils/constants.js';
+import EventListing from '../eventListing/eventListingDb.js';
 
 /**
  *
@@ -40,6 +41,39 @@ const getPromoter = async(eventId) => {
 const getById = async(id) => {
     try {
         const detail = await Promoter.findById({ _id: id }).lean();
+        return detail;
+    } catch (error) {
+        return error.message;
+    }
+};
+
+/**
+ *
+ * @param {*} id
+ * @returns
+ */
+const getByEventId = async(id) => {
+    try {
+        const detail = await Promoter.findById({ eventId: id }).lean();
+        return detail;
+    } catch (error) {
+        return error.message;
+    }
+};
+
+/**
+ *
+ * @param {*} id
+ * @returns
+ */
+const getByEmailId = async(email) => {
+    try {
+        const detail = await Promoter.find({ email: email }).populate('eventId').lean();
+        if(!detail){
+            return MESSAGE.DATA_NOT_FOUND;
+        }
+        const eventList = await EventListing.find({ _id: detail.eventId });
+        detail.event = eventList;
         return detail;
     } catch (error) {
         return error.message;
@@ -123,7 +157,9 @@ const promotersCategoryUpdate = async(id, data, idx) => {
         if( !promoterData ){
             return MESSAGE.DATA_ALREADY_EXIST;
         }
-        promoterData.category[idx] = data;
+        let category = promoterData.category;
+        category[idx] = data;
+        promoterData.category = category;
         const detail = await Promoter.findOneAndUpdate(
             { _id: id },
             promoterData,
@@ -167,4 +203,6 @@ export{
     promotersCategory,
     promotersCategoryUpdate,
     promotersCategoryDelete,
+    getByEmailId,
+    getByEventId,
 };

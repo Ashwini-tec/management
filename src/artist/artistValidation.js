@@ -29,6 +29,7 @@ const update = () => {
         insta_url:Joi.string(),
         twitter_url:Joi.string(),
         linkedin_url:Joi.string(),
+        isActive: Joi.boolean(),
     });
 };
 

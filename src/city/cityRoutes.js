@@ -21,7 +21,7 @@ router.post(
  */
 router.get(
     '/city',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     cityController.getCity
 );
 
@@ -30,7 +30,7 @@ router.get(
  */
 router.get(
     '/city/:id',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     cityController.getById
 );
 

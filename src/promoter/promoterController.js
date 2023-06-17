@@ -67,6 +67,49 @@ const getById = async(req, res) => {
  *
  * @param {*} req
  * @param {*} res
+ * @returns data by id
+ */
+const getByEventId = async(req, res) => {
+    try {
+        const { id : eventId } = req.params;
+        const detail = await promoterSevice.getByEventId(eventId);
+        return res.status(200).json({
+            data: detail ?? MESSAGE.DATA_NOT_FOUND,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+/**
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns data by id
+ */
+const getByEmailId = async(req, res) => {
+    try {
+        const { email } = req.params;
+        const detail = await promoterSevice.getByEmailId(email);
+        return res.status(200).json({
+            data: detail ?? MESSAGE.DATA_NOT_FOUND,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+        });
+    }
+};
+
+
+/**
+ *
+ * @param {*} req
+ * @param {*} res
  * @returns updated data
  */
 const updatePromoter = async(req, res) => {
@@ -180,4 +223,6 @@ export{
     promotersCategory,
     promotersCategoryUpdate,
     promotersCategoryDelete,
+    getByEmailId,
+    getByEventId,
 };

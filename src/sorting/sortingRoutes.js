@@ -21,7 +21,7 @@ router.post(
  */
 router.get(
     '/sorting',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     sortingController.getSorting
 );
 
@@ -30,7 +30,7 @@ router.get(
  */
 router.get(
     '/sorting/:id',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     sortingController.getById
 );
 

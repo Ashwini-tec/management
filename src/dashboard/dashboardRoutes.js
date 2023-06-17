@@ -21,7 +21,7 @@ router.get(
 router.post(
     '/subscribe',
     validation(dashboardSchema.subscribe()),
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     dashboardController.subscribe
 );
 
@@ -32,6 +32,15 @@ router.get(
     '/subscribe',
     authenticate.verifyUser,
     dashboardController.getSubscriber
+);
+
+/**
+ * get unsubscribe
+ */
+router.post(
+    '/unsubscribe',
+    // authenticate.verifyUser,
+    dashboardController.unSubscribe
 );
 
 /**
@@ -49,7 +58,7 @@ router.post(
  */
 router.get(
     '/utiles',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     dashboardController.getUtils
 );
 export default router;

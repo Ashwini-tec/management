@@ -11,7 +11,7 @@ const router = new Router();
  */
 router.post(
     '/guestUser',
-    authenticate.verifyUser,
+    // authenticate.verifyUser,
     validation(guestUserSchema.create()),
     guestUser.createGuestUser
 );
@@ -54,4 +54,30 @@ router.delete(
     guestUser.deleteGuestUser
 );
 
+/**
+ * forgot password
+ */
+router.post(
+    '/guestUser/forgot/password',
+    validation(guestUserSchema.forgotPassword()),
+    guestUser.forgotPassword
+);
+
+/**
+ * reset password
+ */
+router.post(
+    '/guestUser/reset/password',
+    validation(guestUserSchema.resetPassword()),
+    guestUser.resetPassword
+);
+
+/**
+ * OTP verification
+ */
+router.post(
+    '/guestUser/otp/verify',
+    validation(guestUserSchema.otpVerification()),
+    authenticate.verifyOTPUser
+);
 export default router;
